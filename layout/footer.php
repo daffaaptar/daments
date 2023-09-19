@@ -1,10 +1,6 @@
 <!-- /.content-wrapper -->
 <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-        <a href="https://www.youtube.com/playlist?list=PLmpPnj-rO7zD35KEgCXFHz52DThAoyRjf">Full CRUD PHP MySQL Muba Teknologi</a>
-    </div>
+    
 </footer>
 
 <!-- Control Sidebar -->

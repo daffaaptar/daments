@@ -84,7 +84,7 @@ if (isset($_POST['ubah'])) {
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <?php if ($_SESSION['level'] == 1) : ?>
+                    <?php if ($_SESSION['level'] == "super-admin") : ?>
                         <button type="button" class="btn btn-primary btn-sm mb-1" data-toggle="modal" data-target="#modalTambah"><i class="fas fa-plus"></i> Tambah</button>
                     <?php endif; ?>
 
@@ -93,9 +93,10 @@ if (isset($_POST['ubah'])) {
                             <tr>
                                 <th>No</th>
                                 <th>Nama</th>
+                                <th>Role</th>
                                 <th>Username</th>
                                 <th>Email</th>
-                                <th>Password</th>
+                                
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -103,15 +104,18 @@ if (isset($_POST['ubah'])) {
                         <tbody>
                             <?php $no = 1; ?>
                             <!-- tampil seluruh data -->
-                            <?php if ($_SESSION['level'] == 1) : ?>
+                            <?php if ($_SESSION['level'] == 'super-admin') : ?>
                                 <?php foreach ($data_akun as $akun) : ?>
                                     <tr>
                                         <td><?= $no++; ?></td>
                                         <td><?= $akun['nama']; ?></td>
+                                        <td><?= $akun['level']; ?></td>
                                         <td><?= $akun['username']; ?></td>
                                         <td><?= $akun['email']; ?></td>
-                                        <td>Password Ter-enkripsi</td>
                                         <td class="text-center">
+                                        
+                                            <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#modalUbah<?= $akun['id_akun']; ?>"><i class="fas fa-detail"></i> Lihat Absen</button>
+                                            
                                             <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#modalUbah<?= $akun['id_akun']; ?>"><i class="fas fa-edit"></i> Ubah</button>
 
                                             <button type="button" class="btn btn-danger mb-1" data-toggle="modal" data-target="#modalHapus<?= $akun['id_akun']; ?>"><i class="fas fa-trash-alt"></i> Hapus</button>
@@ -124,9 +128,9 @@ if (isset($_POST['ubah'])) {
                                     <tr>
                                         <td><?= $no++; ?></td>
                                         <td><?= $akun['nama']; ?></td>
+                                        <td><?= $akun['level']; ?></td>
                                         <td><?= $akun['username']; ?></td>
                                         <td><?= $akun['email']; ?></td>
-                                        <td>Password Ter-enkripsi</td>
                                         <td class="text-center">
                                             <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#modalUbah<?= $akun['id_akun']; ?>">Ubah</button>
                                         </td>
@@ -177,10 +181,10 @@ if (isset($_POST['ubah'])) {
                     <div class="form-group">
                         <label for="level">Level</label>
                         <select name="level" id="level" class="form-control" required>
-                            <option value="">-- pilih level --</option>
-                            <option value="1">Super Admin</option>
-                            <option value="2">Admin</option>
-                            <option value="3">Karyawan</option>
+                            <option value="">-- Pilih Role --</option>
+                            <option value="Super Admin">Super Admin</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Karyawan">Karyawan</option>
                         </select>
                     </div>
             </div>
@@ -233,9 +237,10 @@ if (isset($_POST['ubah'])) {
                                 <label for="level">Level</label>
                                 <select name="level" id="level" class="form-control" required>
                                     <?php $level = $akun['level']; ?>
-                                    <option value="1" <?= $level == '1' ? 'selected' : null ?>>Admin</option>
-                                    <option value="2" <?= $level == '2' ? 'selected' : null ?>>Operator Barang</option>
-                                    <option value="3" <?= $level == '3' ? 'selected' : null ?>>Operator Mahasiswa</option>
+                                    <option value="" <?= $level == '' ? 'selected' : null ?>>~~Pilih Role~~</option>
+                                    <option value="Super Admin" <?= $level == 'Super Admin' ? 'selected' : null ?>>Super Admin</option>
+                                    <option value="Admin" <?= $level == 'Admin' ? 'selected' : null ?>>Admin</option>
+                                    <option value="Karyawan" <?= $level == 'Karyawan' ? 'selected' : null ?>>Karyawan</option>
                                 </select>
                             </div>
                         <?php else : ?>

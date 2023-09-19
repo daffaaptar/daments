@@ -77,7 +77,7 @@ if (isset($_POST['ubah'])) {
                             <!-- tampil seluruh data -->
                             
                                
-                    <h3 class="card-title">Hallo </h3>
+                    <h3 class="card-title">Hallo <?= $_SESSION['nama']; ?> </h3>
                     
                 </div>
                 <!-- /.card-header -->
@@ -86,12 +86,21 @@ if (isset($_POST['ubah'])) {
                         <div class="ciah shadow-sm sm:rounded-lg" style=" width: 100%; height: 100vh; background-image: url('https://media.licdn.com/dms/image/D5605AQGeUxt6kfzs5A/feedshare-thumbnail_720_1280/0/1693883976893?e=2147483647&v=beta&t=knBoP755Kd0yNKGUvVK1IuCycgebBBLGNfJy0CFhI38'); backdrop-filter: blur(5px); background-size: cover;  height: 50vh ;    background-size: cover ;    background-position: center ;    background-repeat: no-repeat ;">  
                             <div> 
                             <center>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" style='margin-top: 150px;'>
-                                keluar
-                                </button>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" style='margin-top: 150px;'>
-                                haha
-                                </button>
+                            <?php
+                            if (isset($_GET['ab'])) {
+                                if ($_GET['ab']==1) {
+                                    echo "<div class='alert alert-warning'><strong>Terimakasih, Absen berhasil.</strong></div>";
+                                } elseif($_GET['ab']==2) {
+                                    echo "<div class='alert alert-danger'><strong>Maaf, Absen Gagal. Silahkan Coba Kembali!</strong></div>";
+                                }
+                            }
+                        
+                            ?>
+                        
+                                <td><button type='button' class='btn btn-warning' onclick=\"window.location.href='./model/proses.php?absen=1';\" $disable_in>Absen Masuk</button></td>
+                                <td><button type='button' class='btn btn-danger' onclick=\"window.location.href='./model/proses.php?absen=2';\" $disable_out>Absen Pulang</button></td>
+                         
+                            
                             </center>
                             </div>  
                         </div>  

@@ -71,7 +71,7 @@ include 'config/app.php';
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-header">Daftar Menu</li>
 
-                        <?php if ($_SESSION['level'] == 1 or $_SESSION['level'] == 2) : ?>
+                        <?php if ($_SESSION['level'] == "super-admin" or $_SESSION['level'] == "admin") : ?>
                             <li class="nav-item">
                                 <a href="index.php" class="nav-link">
                                     <i class="nav-icon fas fa-list"></i>
@@ -82,25 +82,37 @@ include 'config/app.php';
                             </li>
                         <?php endif; ?>
 
-                        <?php if ($_SESSION['level'] == 1 or $_SESSION['level'] == 3) : ?>
+                        <?php if ($_SESSION['level'] == "karyawan") : ?>
+                            <li class="nav-item">
+                                <a href="presensi.php" class="nav-link">
+                                    <i class="nav-icon fas fa-list"></i>
+                                    <p>
+                                        Absenku
+                                    </p>
+                                </a>
+                            </li>
+                            <?php endif; ?>
+
+                            <?php if ($_SESSION['level'] == "karyawan") : ?>
+                        <li class="nav-item">
+                            <a href="akun.php" class="nav-link">
+                                    <i class="nav-icon fas fa-user-cog"></i>
+                                        <p>
+                                            Absen
+                                        </p>
+                                </a>
+                            </li>
+                            <?php endif; ?>
+                        
                             <li class="nav-item">
                                 <a href="mahasiswa.php" class="nav-link">
                                     <i class="nav-icon fas fa-users"></i>
                                     <p>
-                                        Data Mahasiswa
+                                        Data Akun
                                     </p>
                                 </a>
                             </li>
-                        <?php endif; ?>
-
-                        <li class="nav-item">
-                            <a href="akun.php" class="nav-link">
-                                <i class="nav-icon fas fa-user-cog"></i>
-                                <p>
-                                    Data Akun
-                                </p>
-                            </a>
-                        </li>
+                        
 
                         <li class="nav-item">
                             <a href="logout.php" onclick="return confirm('Yakin ingin keluar.?')" class="nav-link">
