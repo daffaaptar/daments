@@ -27,7 +27,7 @@ include 'config/app.php';
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="assets-template/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- DataTables -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="assets-template/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="assets-template/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
@@ -49,10 +49,10 @@ include 'config/app.php';
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index.php" class="brand-link">
-                <img src="assets-template/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <!-- <a href="index.php" class="brand-link">
+                <img src="https://amalsolution.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Famal-logo-lg.bef288eb.png&w=256&q=75" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light"></span>
-            </a>
+            </a> -->
 
             <!-- Sidebar -->
             <div class="sidebar">
@@ -70,17 +70,6 @@ include 'config/app.php';
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-header">Daftar Menu</li>
-
-                        <?php if ($_SESSION['level'] == "super-admin" or $_SESSION['level'] == "admin") : ?>
-                            <li class="nav-item">
-                                <a href="index.php" class="nav-link">
-                                    <i class="nav-icon fas fa-list"></i>
-                                    <p>
-                                        Data Barang
-                                    </p>
-                                </a>
-                            </li>
-                        <?php endif; ?>
 
                         <?php if ($_SESSION['level'] == "karyawan") : ?>
                             <li class="nav-item">
