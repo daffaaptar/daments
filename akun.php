@@ -81,9 +81,9 @@ if (isset($_POST['ubah'])) {
                     
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body">
+                <div class="card-body" >
                     <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8  ">  
-                        <div class="ciah shadow-sm sm:rounded-lg" style=" width: 100%; height: 100vh; background-image: url('https://media.licdn.com/dms/image/D5605AQGeUxt6kfzs5A/feedshare-thumbnail_720_1280/0/1693883976893?e=2147483647&v=beta&t=knBoP755Kd0yNKGUvVK1IuCycgebBBLGNfJy0CFhI38'); backdrop-filter: blur(5px); background-size: cover;  height: 50vh ;    background-size: cover ;    background-position: center ;    background-repeat: no-repeat ;">  
+                        <div class="ciah shadow-sm sm:rounded-lg" style=" width: 100%; height: 150vh; background-image: url('https://media.licdn.com/dms/image/D5605AQGeUxt6kfzs5A/feedshare-thumbnail_720_1280/0/1693883976893?e=2147483647&v=beta&t=knBoP755Kd0yNKGUvVK1IuCycgebBBLGNfJy0CFhI38'); backdrop-filter: blur(5px); background-size: cover;  height: 70vh ;    background-size: cover ;    background-position: center ;    background-repeat: no-repeat ;">  
                             <div> 
                             <center>
                             <?php
@@ -123,8 +123,8 @@ if (isset($_POST['ubah'])) {
                                 }
 
                                 echo "
-                                    <button type='button' class='btn btn-warning' onclick=\"window.location.href='./model/proses.php?absen=1';\" $disable_in>Absen Masuk</button>
-                                    <button type='button' class='btn btn-danger' onclick=\"window.location.href='./model/proses.php?absen=2';\" $disable_out>Absen Pulang</button>
+                                    <button type='button' class='btn btn-success' onclick=\"window.location.href='./model/proses.php?absen=1';\" $disable_in style='margin-top:250px;  font-size:25px; border-radius:10px; font-family: roboto;'>Absen Masuk</button>
+                                    <button type='button' class='btn btn-danger' onclick=\"window.location.href='./model/proses.php?absen=2';\" $disable_out style='margin-top:250px; font-size:25px; border-radius:10px; font-family: roboto;'>Absen Pulang</button>
                                 ";
                                 echo "</table></div>";
                                 $db->close();

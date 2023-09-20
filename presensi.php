@@ -64,9 +64,133 @@ if (isset($_POST['ubah'])) {
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div class="p-6 text-gray-900">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#presensi">Presensi</button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-bs-target="Activity">Activity</button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-bs-target="OverTime">OverTime</button>
+                            <?php
+	if (isset($_SESSION['karyawan'])) {
+		$sql = "SELECT*FROM akun WHERE id_akun='$_SESSION[id_akun]'";
+	    $query = $db->query($sql);
+		$get_user=$query->fetch_assoc();
+		$name = $get_user['nama'];
+		$id_user = $get_user['id_akun'];
+
+		echo "<h1 class='page-header'>Welcome, $name</h1>";
+		
+			if ($db->query("SELECT*FROM data_absen WHERE id_user='$id_user'")->num_rows!==0) {
+				$no=0;
+			 	$query_month=$db->query("SELECT*FROM bulan ORDER BY id_bln ASC");
+			 	while ($get_month=$query_month->fetch_assoc()) {
+			      $month=$get_month['nama_bln'];
+			      $id_month=$get_month['id_bln'];
+			      
+			      $query_absen=$db->query("SELECT*FROM data_absen NATURAL LEFT JOIN bulan NATURAL JOIN hari NATURAL JOIN tanggal WHERE id_bln='$id_month' AND id_user='$id_user'");
+			      
+			      $cek = $query_absen->num_rows;
+			      if ($cek!==0) {
+			        echo "<h3 class='sub-header'>Absensiku - $month </h3>";
+			        echo "<div class='table-responsive'>
+			           <table class='table table-striped'>
+			            <thead>
+			               <tr>
+			                <th>No</th>
+			                <th>Hari, Tanggal</th>
+			                <th>Jam Masuk</th>
+			                
+			                <th>Jam Keluar</th>
+			                
+			               </tr>
+			            </thead>
+			            <tbody>";
+			          $no=0;
+			          while ($get_absen=$query_absen->fetch_assoc()) {
+			            $no++;
+			            $date = "$get_absen[nama_hri], $get_absen[nama_tgl] $get_absen[nama_bln] ".date("Y");
+			            $time_in = "$get_absen[jam_msk]";
+			             if ($get_absen['jam_klr']==="") {
+			             	$time_out = "<strong>Belum Absen</strong>";
+			             } else {
+			             	$time_out = "$get_absen[jam_klr]";
+			             }
+			            echo "<tr>
+			                <td>$no</td>
+			                <td>$date</td>
+			                <td>$time_in</td>
+			                
+			                <td>$time_out</td>
+			                
+			              </tr>";
+			          }
+			          echo "</table></div>";
+			      	}
+				}
+			$db->close();
+			} else {
+				echo "<div class='alert alert-warning'><strong>Tidak ada Absensi untuk ditampilkan.</strong></div>";
+			}
+	} else {
+	    
+		$query = $db->query("SELECT*FROM akun WHERE id_akun='$id_akun'");
+		$get_user=$query->fetch_assoc();
+		$name = $get_user['nama'];
+		$id_user = $get_user['id_akun'];
+			if ($db->query("SELECT*FROM data_absen WHERE id_user='$id_user'")->num_rows!==0) {
+				$no=0;
+			 	$query_month=$db->query("SELECT*FROM bulan ORDER BY id_bln ASC");
+			 	while ($get_month=$query_month->fetch_assoc()) {
+			      $month = $get_month['nama_bln'];
+			      $year = date("Y");
+			      $id_month=$get_month['id_bln'];
+			      
+			      $query_absen=$db->query("SELECT*FROM data_absen NATURAL LEFT JOIN bulan NATURAL JOIN hari NATURAL JOIN tanggal WHERE id_bln='$id_month' AND id_user='$id_user'");
+			      
+			      $cek = $query_absen->num_rows;
+			      if ($cek!==0) {
+			        echo "<h4 class='sub-header'><strong>Absensi:</strong> $name<br><strong>Bulan:</strong> $month $year </h4>";
+			        echo "<div class='table-responsive'>
+			           <table class='table table-bordered'>
+			            <thead>
+                  <tr>
+                  <th rowspan='2' style='text-align: center; vertical-align: middle;'>NO</th>
+                  <th rowspan='2' style='text-align: center; vertical-align: middle;'>Tanggal</th>
+                  <th class='text-center' style='width: 10%;'>Datang</th>
+                  <th class='text-center' width='10%'>Pulang</th>
+                  <th rowspan='2' class='text-center' width='7%' style='text-align: center; vertical-align: middle;'>Isoma</th>
+                  <th rowspan='2' width='10%' style='text-align: center; vertical-align: middle;'>Durasi</th>
+                  <th class='text-center' style='width: 10%;'>Jumlah</th>
+                  <th rowspan='2' width='50%' style='text-align: center; vertical-align: middle;'>Keterangan/Progres</th>
+                </tr>
+			            </thead>
+			            <tbody>";
+			          $no=0;
+			          while ($get_absen=$query_absen->fetch_assoc()) {
+			            $no++;
+			            $date = "$get_absen[nama_hri], $get_absen[nama_tgl] $get_absen[nama_bln] ".date("Y");
+			            $time_in = "$get_absen[jam_msk]";
+			             if ($get_absen['jam_klr']==="") {
+			             	$time_out = "<strong>Belum Absen</strong>";
+			             } else {
+			             	$time_out = "$get_absen[jam_klr]";
+			             }
+			            
+			            echo "<tr>
+			                <td>$no</td>
+			                <td>$date</td>
+			                <td>$time_in</td>
+			                <td>$time_out</td>
+			                <td></td>
+			                <td></td>
+			                <td></td>
+			                <td></td>
+			                
+			              </tr>";
+			          }
+			          echo "</table></div>";
+			      	}
+				}
+				$db->close();
+			} else {
+				echo "<div class='alert alert-warning'><strong>Tidak ada Absensi untuk ditampilkan.</strong></div>";
+			}
+	}
+?>
                                 
                             </div>
                         </div>
@@ -75,52 +199,5 @@ if (isset($_POST['ubah'])) {
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
-</div></center>
-<div class="modal " id="presensi" tabindex="-1"">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <table class="table table-bordered">    
-        <tr>
-            <th rowspan="2" style="text-align: center; vertical-align: middle;">NO</th>
-            <th rowspan="2" style="text-align: center; vertical-align: middle;">Tanggal</th>
-            <th class="text-center" style="width: 10%;">Datang</th>
-            <th class="text-center" width="10%">Pulang</th>
-            <th rowspan="2" class="text-center" width="7%" style="text-align: center; vertical-align: middle;">Isoma</th>
-            <th rowspan="2" width="10%" style="text-align: center; vertical-align: middle;">Durasi</th>
-            <th colspan="2" class="text-center" style="width: 10%;">Jumlah</th>
-            <th rowspan="2" width="50%" style="text-align: center; vertical-align: middle;">Keterangan/Progres</th>
-          </tr>
-          <tr>
-            <th class="text-center">Pukul</th>
-            <th class="text-center">Pukul</th>
-            <th class="text-center" width="8%">Jam</th>
-            <th class="text-center" width="8%">Menit</th>
-          </tr>
-          <tr>
-            <td style="text-align: center; vertical-align: middle;">1</td>
-            <td width="10%" style="text-align: center; vertical-align: middle;">1 Agustus 2023</td>
-            <td width="10%" style="text-align: center; vertical-align: middle;">08.00</td>
-            <td width="10%" style="text-align: center; vertical-align: middle;">18.00</td>
-            <td width="10%" style="text-align: center; vertical-align: middle;">1:00</td>
-            <td width="10%" style="text-align: center; vertical-align: middle;">9:00</td>
-            <td width="10%" style="text-align: center; vertical-align: middle;">7</td>
-            <td width="10%" style="text-align: center; vertical-align: middle;">8</td>
-            <td ></td>
-          </tr>
-          
-    </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
 </div>
-
 <?php include 'layout/footer.php'; ?>

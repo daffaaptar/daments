@@ -27,7 +27,7 @@ include 'config/app.php';
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="assets-template/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- DataTables -->
-    <link rel="stylesheet" href="assets-template/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="assets-template/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="assets-template/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
@@ -87,7 +87,7 @@ include 'config/app.php';
                                 <a href="presensi.php" class="nav-link">
                                     <i class="nav-icon fas fa-list"></i>
                                     <p>
-                                        Absenku
+                                        Report
                                     </p>
                                 </a>
                             </li>
