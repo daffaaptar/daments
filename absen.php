@@ -52,6 +52,14 @@ if (isset($_POST['ubah'])) {
     }
 }
 
+// membatasi halaman sesuai user login
+if ($_SESSION["level"] != "karyawan") {
+    echo "<script>
+            alert('Perhatian anda tidak punya hak akses');
+            document.location.href = 'dataakun.php';
+          </script>";
+    exit;
+}
 ?>
 
 <!-- Content Wrapper. Contains page content -->
@@ -126,7 +134,7 @@ if (isset($_POST['ubah'])) {
                                     <button type='button' class='btn btn-success' onclick=\"window.location.href='./model/proses.php?absen=1';\" $disable_in style='margin-top:250px;  font-size:25px; border-radius:10px; font-family: roboto;'>Absen Masuk</button>
                                     <button type='button' class='btn btn-danger' onclick=\"window.location.href='./model/proses.php?absen=2';\" $disable_out style='margin-top:250px; font-size:25px; border-radius:10px; font-family: roboto;'>Absen Pulang</button>
                                 ";
-                                echo "</table></div>";
+                                ;
                                 $db->close();
                                 ?>
 

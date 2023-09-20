@@ -95,7 +95,7 @@ include 'config/app.php';
 
                             <?php if ($_SESSION['level'] == "karyawan") : ?>
                         <li class="nav-item">
-                            <a href="akun.php" class="nav-link">
+                            <a href="absen.php" class="nav-link">
                                     <i class="nav-icon fas fa-user-cog"></i>
                                         <p>
                                             Absen
@@ -105,7 +105,7 @@ include 'config/app.php';
                             <?php endif; ?>
                         
                             <li class="nav-item">
-                                <a href="mahasiswa.php" class="nav-link">
+                                <a href="dataakun.php" class="nav-link">
                                     <i class="nav-icon fas fa-users"></i>
                                     <p>
                                         Data Akun

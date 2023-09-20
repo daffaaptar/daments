@@ -143,7 +143,7 @@ if (isset($_POST['ubah'])) {
 			      
 			      $cek = $query_absen->num_rows;
 			      if ($cek!==0) {
-			        echo "<h4 class='sub-header'><strong>Absensi:</strong> $name<br><strong>Bulan:</strong> $month $year </h4>";
+			        echo "<br>  <h5 class='sub-header'><strong>Absensi:</strong> $name<br><br><strong>Bulan:</strong> $month $year </h5>";
 			        echo "<div class='table-responsive'>
 			           <table class='table table-bordered'>
 			            <thead>

@@ -28,7 +28,7 @@ if (isset($_POST['login'])) {
             $_SESSION['level']      = $hasil['level'];
 
             // jika login benar arahkan ke file index.php
-            header("Location: mahasiswa.php");
+            header("Location: dataakun.php");
             exit;
         }
     }
