@@ -182,9 +182,9 @@ if (isset($_POST['ubah'])) {
                         <label for="level">Level</label>
                         <select name="level" id="level" class="form-control" required>
                             <option value="">-- Pilih Role --</option>
-                            <option value="Super Admin">Super Admin</option>
-                            <option value="Admin">Admin</option>
-                            <option value="Karyawan">Karyawan</option>
+                            <option value="super-admin">Super Admin</option>
+                            <option value="admin">Admin</option>
+                            <option value="karyawan">Karyawan</option>
                         </select>
                     </div>
             </div>

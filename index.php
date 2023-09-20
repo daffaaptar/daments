@@ -12,7 +12,7 @@ if (!isset($_SESSION["login"])) {
 }
 
 // membatasi halaman sesuai user login
-if ($_SESSION["level"] != 1 and $_SESSION["level"] != 2) {
+if ($_SESSION["level"] != "super-admin" and $_SESSION["level"] != "admin") {
     echo "<script>
             alert('Perhatian anda tidak punya hak akses');
             document.location.href = 'akun.php';
