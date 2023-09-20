@@ -11,7 +11,7 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 
-$title = 'Daftar Akun';
+$title = 'Data Akun';
 
 include 'layout/header.php';
 
@@ -27,12 +27,12 @@ if (isset($_POST['tambah'])) {
     if (create_akun($_POST) > 0) {
         echo "<script>
                 alert('Data Akun Berhasil Ditambahkan');
-                document.location.href = 'akun.php';
+                document.location.href = 'dataakun.php';
               </script>";
     } else {
         echo "<script>
                 alert('Data Akun Gagal Ditambahkan');
-                document.location.href = 'akun.php';
+                document.location.href = 'dataakun.php';
               </script>";
     }
 }
@@ -42,12 +42,12 @@ if (isset($_POST['ubah'])) {
     if (update_akun($_POST) > 0) {
         echo "<script>
                 alert('Data Akun Berhasil Diubah');
-                document.location.href = 'akun.php';
+                document.location.href = 'dataakun.php';
               </script>";
     } else {
         echo "<script>
                 alert('Data Akun Gagal Diubah');
-                document.location.href = 'akun.php';
+                document.location.href = 'dataakun.php';
               </script>";
     }
 }
@@ -79,16 +79,14 @@ if (isset($_POST['ubah'])) {
 
             <!-- Main content -->
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Tabel Data Akun</h3>
-                </div>
+                
                 <!-- /.card-header -->
                 <div class="card-body">
                     <?php if ($_SESSION['level'] == "super-admin") : ?>
-                        <button type="button" class="btn btn-primary btn-sm mb-1" data-toggle="modal" data-target="#modalTambah"><i class="fas fa-plus"></i> Tambah</button>
+                        <button type="button" class="btn btn-primary btn-sm mb-1" data-toggle="modal" data-target="#modalTambah"><i class="fas fa-plus"></i> Tambah Akun</button>
                     <?php endif; ?>
 
-                    <table id="example2" class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover mt-3">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -96,51 +94,54 @@ if (isset($_POST['ubah'])) {
                                 <th>Role</th>
                                 <th>Username</th>
                                 <th>Email</th>
-                                
                                 <th>Aksi</th>
                             </tr>
-                        </thead>
+                          </thead>
+                        </div>
+                    <tbody>
+        <?php $no = 1; ?>
+        <!-- tampil seluruh data -->
+<?php if ($_SESSION['level'] == 'super-admin' or $_SESSION['level'] == 'admin') : ?>
+    <?php foreach ($data_akun as $akun) : ?>
+    <tr>
+        <td><?= $no++; ?></td>
+        <td><?= $akun['nama']; ?></td>
+        <td><?= $akun['level']; ?></td>
+        <td><?= $akun['username']; ?></td>
+        <td><?= $akun['email']; ?></td>
+        <td class="text-center">
+        
+            <a href="absen.php" class="btn btn-primary mb-1">Lihat Absensi</a>
+            <?php if ($_SESSION['level'] == 'super-admin') : ?>
+            <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#modalUbah<?= $akun['id_akun']; ?>"><i class="fas fa-edit"></i> Ubah</button>
+            <button type="button" class="btn btn-danger mb-1" data-toggle="modal" data-target="#modalHapus<?= $akun['id_akun']; ?>"><i class="fas fa-trash-alt"></i> Hapus</button>
+            <?php endif; ?>
+        </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <!-- tampil data berdasarkan user login -->
+            <?php foreach ($data_bylogin as $akun) : ?>
+                <tr>
+                    <td><?= $no++; ?></td>
+                    <td><?= $akun['nama']; ?></td>
+                    <td><?= $akun['level']; ?></td>
+                    <td><?= $akun['username']; ?></td>
+                    <td><?= $akun['email']; ?></td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#modalUbah<?= $akun['id_akun']; ?>">Ubah</button>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </tbody>
+</table>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
 
-                        <tbody>
-                            <?php $no = 1; ?>
-                            <!-- tampil seluruh data -->
-                            <?php if ($_SESSION['level'] == 'super-admin') : ?>
-                                <?php foreach ($data_akun as $akun) : ?>
-                                    <tr>
-                                        <td><?= $no++; ?></td>
-                                        <td><?= $akun['nama']; ?></td>
-                                        <td><?= $akun['level']; ?></td>
-                                        <td><?= $akun['username']; ?></td>
-                                        <td><?= $akun['email']; ?></td>
-                                        <td class="text-center">
-                                        
-                                            <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#modalUbah<?= $akun['id_akun']; ?>"><i class="fas fa-detail"></i> Lihat Absen</button>
-                                            
-                                            <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#modalUbah<?= $akun['id_akun']; ?>"><i class="fas fa-edit"></i> Ubah</button>
 
-                                            <button type="button" class="btn btn-danger mb-1" data-toggle="modal" data-target="#modalHapus<?= $akun['id_akun']; ?>"><i class="fas fa-trash-alt"></i> Hapus</button>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            <?php else : ?>
-                                <!-- tampil data berdasarkan user login -->
-                                <?php foreach ($data_bylogin as $akun) : ?>
-                                    <tr>
-                                        <td><?= $no++; ?></td>
-                                        <td><?= $akun['nama']; ?></td>
-                                        <td><?= $akun['level']; ?></td>
-                                        <td><?= $akun['username']; ?></td>
-                                        <td><?= $akun['email']; ?></td>
-                                        <td class="text-center">
-                                            <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#modalUbah<?= $akun['id_akun']; ?>">Ubah</button>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+</div>
+</div>
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->

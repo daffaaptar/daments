@@ -44,7 +44,7 @@ if (isset($_POST['login'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Login</title>
+    <title>Login</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -55,15 +55,14 @@ if (isset($_POST['login'])) {
     <!-- Theme style -->
     <link rel="stylesheet" href="assets-template/dist/css/adminlte.min.css">
     <!-- Favicons -->
-    <link rel="icon" href="assets-template/img/bootstrap-logo.svg">
+    <link rel="icon" href="https://amalsolution.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Famal-logo-lg.bef288eb.png&w=256&q=75">
 </head>
 
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
             <div class="text-center">
-                <img class="mb-4" src="assets-template/img/bootstrap-logo.svg" alt="" width="72" height="57">
-                <a href="#"><b>Admin</b>LTE</a>
+                <img class="mb-4" src="https://amalsolution.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Famal-logo-lg.bef288eb.png&w=256&q=75" alt="" width="150" height="120">
             </div>
         </div>
         <!-- /.login-logo -->
@@ -108,12 +107,12 @@ if (isset($_POST['login'])) {
                     </div>
                 </form>
 
-                <hr>
+               <!-- <hr>
                 <p class="mb-1 text-center">
                     <span class="mt-5 mb-3 text-muted">Developer &copy;
                         <a href="https://mubatekno.com">Muba Teknologi</a> <?= date('Y') ?>
                     </span>
-                </p>
+                </p> -->
             </div>
             <!-- /.login-card-body -->
         </div>
