@@ -79,9 +79,7 @@ if (isset($_POST['ubah'])) {
 
             <!-- Main content -->
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Tabel Data Akun</h3>
-                </div>
+                
                 <!-- /.card-header -->
                 <div class="card-body">
                     <?php if ($_SESSION['level'] == "super-admin") : ?>

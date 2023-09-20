@@ -152,9 +152,9 @@ if (isset($_POST['ubah'])) {
                   <th rowspan='2' style='text-align: center; vertical-align: middle;'>Tanggal</th>
                   <th class='text-center' style='width: 10%;'>Datang</th>
                   <th class='text-center' width='10%'>Pulang</th>
-                  <th rowspan='2' class='text-center' width='7%' style='text-align: center; vertical-align: middle;'>Isoma</th>
+                  
                   <th rowspan='2' width='10%' style='text-align: center; vertical-align: middle;'>Durasi</th>
-                  <th class='text-center' style='width: 10%;'>Jumlah</th>
+                  
                   <th rowspan='2' width='50%' style='text-align: center; vertical-align: middle;'>Keterangan/Progres</th>
                 </tr>
 			            </thead>
@@ -176,8 +176,7 @@ if (isset($_POST['ubah'])) {
 			                <td>$time_in</td>
 			                <td>$time_out</td>
 			                <td></td>
-			                <td></td>
-			                <td></td>
+			                
 			                <td></td>
 			                
 			              </tr>";
