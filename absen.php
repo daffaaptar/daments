@@ -123,7 +123,9 @@ if ($_SESSION["level"] != "karyawan") {
 
         echo "
             <button type='button' class='btn btn-success' onclick=\"window.location.href='./model/proses.php?absen=1';\" $disable_in style='margin-top:180px;  font-size:18px; border-radius:5px;'>Absen Masuk</button>
-            <button type='button' class='btn btn-danger' onclick=\"window.location.href='./model/proses.php?absen=2';\" $disable_out style='margin-top:180px; font-size:18px; border-radius:5px;'>Absen Pulang</button>
+            <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#keluar' style='margin-top:180px;  font-size:18px; border-radius:5px;'>
+            Launch static backdrop modal
+            </button>
         ";
         ;
         $db->close();
@@ -139,6 +141,30 @@ if ($_SESSION["level"] != "karyawan") {
     <!-- /.content -->
 </div>
 
-
-
+<?php
+echo "
+<div class='modal fade' id='keluar' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <h1 class='modal-title fs-5' id='staticBackdropLabel'>Modal title</h1>
+        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'>
+            <span aria-hidden='true'>&times;</span>
+        </button>
+      </div>
+      <div class='modal-body'>
+        
+      </div>
+      <div class='modal-footer'>
+        
+        
+        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
+        <button type='button' class='btn btn-danger' onclick=\'window.location.href='./model/proses.php?absen=2';\' $disable_out style='margin-top:180px; font-size:18px; border-radius:5px;'>Absen Pulang</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+";
+?>
 <?php include 'layout/footer.php'; ?>

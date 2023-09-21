@@ -56,10 +56,18 @@ if (isset($_POST['ubah'])) {
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
+<div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
     <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid" style="width: 95%">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+    <section class="content">
+			<div class="container-fluid">
+				<div class="card">
+				<div class='card-body'>
                 
 						<?php
 						if (isset($_SESSION['karyawan'])) {
@@ -83,8 +91,8 @@ if (isset($_POST['ubah'])) {
 											$cek = $query_absen->num_rows;
 											if ($cek!==0) {
 												echo "<h3 class='sub-header'>Absensiku - $month </h3>";
-												echo "<div class='table-responsive'>
-													<table class='table table-striped'>
+												echo "
+													<table class='table table-bordered table-hover mt-3'>
 														<thead>
 															<tr>
 																<th>No</th>
@@ -115,7 +123,7 @@ if (isset($_POST['ubah'])) {
 																
 															</tr>";
 													}
-													echo "</table></div>";
+													echo "</table>";
 												}
 									}
 								$db->close();
@@ -144,8 +152,8 @@ if (isset($_POST['ubah'])) {
 											$cek = $query_absen->num_rows;
 											if ($cek!==0) {
 												echo "<br>  <h5 class='sub-header' style='text-align:center;'><br>Bulan: $month $year </h5>";
-												echo "<div class='table-responsive'>
-													<table class='table table-bordered'>
+												echo "
+													<table class='table table-bordered table-hover mt-3'>
 														<thead>
 														<tr>
 														<th rowspan='2' style='text-align: center; vertical-align: middle;'>NO</th>
@@ -194,7 +202,7 @@ if (isset($_POST['ubah'])) {
 																		<td></td>
 																	</tr>";
 														}
-														echo "</table></div>";
+														echo "</table>";
 																					}
 																		}
 																		$db->close();
@@ -205,8 +213,9 @@ if (isset($_POST['ubah'])) {
 														?>
                                 
                             
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
+																</div>
+															</div>
+														</div>
+													</section>
 </div>
 <?php include 'layout/footer.php'; ?>
