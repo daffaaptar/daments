@@ -44,7 +44,7 @@ elseif (isset($_GET['absen'])) {
 		$month = date("m");
 		$day_tgl = date("d");
 		$day = date("N");
-		$hour = date("H.i")." WIB";
+		$hour = date("H:i");
 		$status = "Menunggu";
 		$sql = "INSERT INTO data_absen (
 			id_user,
@@ -81,7 +81,7 @@ elseif (isset($_GET['absen'])) {
 		$id_bln = date("m");
 		$day_tgl = date("d");
 		$day = date("N");
-		$hour = date("H.i")." WIB";
+		$hour = date("H:i");
 		$status = "Menunggu";
 		$sql = "UPDATE data_absen SET jam_klr=?, st_jam_klr=? WHERE id_user='$id_user' AND id_tgl='$day_tgl' AND id_bln='$id_bln'";
 
@@ -92,7 +92,7 @@ elseif (isset($_GET['absen'])) {
 			if ($statement->execute()) {
 				$db->close();
 				header("location:../absen.php");
-				alert('Jangan Lupa Mengisi Activity!');
+				
 
 			} else {
 				header("location:../absen&ab=2");
