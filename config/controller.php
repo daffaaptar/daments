@@ -120,7 +120,7 @@ function update_mahasiswa($post)
     return mysqli_affected_rows($db);
 }
 
-// fungsi mengupload file
+// fungsi mengupload file   
 function upload_file()
 {
     $namaFile   = $_FILES['foto']['name'];

@@ -67,7 +67,6 @@ elseif (isset($_GET['absen'])) {
 				// Absen sukses
 				$db->close();
 				header("location:../absen.php");
-				alert('selamat pagi!');
 			} else {
 				header("location:../absen&ab=2");
 			}

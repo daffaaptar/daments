@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 session_start();
 
@@ -104,9 +104,6 @@ if (isset($_POST['ubah'])) {
                     <h1 class="m-0"><i class="fas fa-user-cog"></i> Data Akun</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item active">Data Akun</li>
-                    </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -151,10 +148,10 @@ if (isset($_POST['ubah'])) {
         <td><?= $akun['email']; ?></td>
         <td class="text-center">
         
-            <a href="absen.php" class="btn btn-primary mb-1">Lihat Absensi</a>
+            <a href="detail-absen.php" class="btn btn-primary mb-1" <?= $akun['id_akun']; ?>>Lihat Absensi</a>
             <?php if ($_SESSION['level'] == 'super-admin') : ?>
-            <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#modalUbah<?= $akun['id_akun']; ?>"><i class="fas fa-edit"></i> Ubah</button>
-            <button type="button" class="btn btn-danger mb-1" data-toggle="modal" data-target="#modalHapus<?= $akun['id_akun']; ?>"><i class="fas fa-trash-alt"></i> Hapus</button>
+            <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#modalUbah<?= $akun['id_akun']; ?>"><i class="fas fa-edit"></i> </button>
+            <button type="button" class="btn btn-danger mb-1" data-toggle="modal" data-target="#modalHapus<?= $akun['id_akun']; ?>"><i class="fas fa-trash-alt"></i> </button>
             <?php endif; ?>
         </td>
                 </tr>
