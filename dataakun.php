@@ -5,7 +5,7 @@ session_start();
 // membatasi halaman sebelum login
 if (!isset($_SESSION["login"])) {
     echo "<script>
-            alert('login dulu dong');
+            alert('Anda perlu login untuk memasuki halaman');
             document.location.href = 'login.php';
           </script>";
     exit;
@@ -64,9 +64,9 @@ if (isset($_POST['ubah'])) {
                     <h1 class="m-0"><i class="fas fa-user-cog"></i> Data Akun</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
+                    <!-- <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item active">Data Akun</li>
-                    </ol>
+                    </ol> -->
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -74,30 +74,27 @@ if (isset($_POST['ubah'])) {
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
+<section class="content">
+  <div class="container-fluid">
+   <div class="card">
+    <!-- /.card-header -->
+    <div class="card-body">
+        <?php if ($_SESSION['level'] == "super-admin") : ?>
+            <button type="button" class="btn btn-primary btn-sm mb-1" data-toggle="modal" data-target="#modalTambah"><i class="fas fa-plus"></i> Tambah Akun</button>
+        <?php endif; ?>
 
-            <!-- Main content -->
-            <div class="card">
-                
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <?php if ($_SESSION['level'] == "super-admin") : ?>
-                        <button type="button" class="btn btn-primary btn-sm mb-1" data-toggle="modal" data-target="#modalTambah"><i class="fas fa-plus"></i> Tambah Akun</button>
-                    <?php endif; ?>
-
-                    <table class="table table-bordered table-hover mt-3">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Role</th>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Aksi</th>
-                            </tr>
-                          </thead>
-                        </div>
+        <table class="table table-bordered table-hover mt-3">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Role</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Aksi</th>
+                </tr>
+                </thead>
+            </div>
                     <tbody>
         <?php $no = 1; ?>
         <!-- tampil seluruh data -->
@@ -138,7 +135,6 @@ if (isset($_POST['ubah'])) {
 </table>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
-
 
 </div>
 </div>

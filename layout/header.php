@@ -18,6 +18,7 @@ include 'config/app.php';
     <link rel="stylesheet" href="assets-template/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="icon" href="https://amalsolution.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Famal-logo-lg.bef288eb.png&w=256&q=75">
     <!-- Tempusdominus Bootstrap 4 -->
     <link rel="stylesheet" href="assets-template/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- iCheck -->
@@ -104,7 +105,7 @@ include 'config/app.php';
                         
 
                         <li class="nav-item">
-                            <a href="logout.php" onclick="return confirm('Yakin ingin keluar.?')" class="nav-link">
+                            <a href="logout.php" class="nav-link">
                                 <i class="nav-icon fas fa-sign-out-alt"></i>
                                 <p>
                                     Keluar
