@@ -67,12 +67,12 @@ if (isset($_POST['login'])) {
         </div>
         <!-- /.login-logo -->
         <div class="card">
-            <div class="card-body login-card-body">
+            <div class="card-body login-card-body" style="border-radius: 20px;">
                 <p class="login-box-msg">Masukan username dan password</p>
 
                 <?php if (isset($error)) : ?>
                     <div class="alert alert-danger text-center">
-                        <b>Username/Password SALAH</b>
+                        <b>Username/Password Salah</b>
                     </div>
                 <?php endif; ?>
 

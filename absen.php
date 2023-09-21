@@ -61,82 +61,73 @@ if ($_SESSION["level"] != "karyawan") {
     exit;
 }
 ?>
-
-<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+            </div>
+        </div>
     </div>
-    <!-- /.content-header -->
-
+  
     <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
+<section class="content">
+<div class="container-fluid">
+<div class="card">
+<div class="card-header">
+    <!-- tampil seluruh data -->        
+<h3 class="card-title">Hallo <?= $_SESSION['nama']; ?> </h3>
 
-            <!-- Main content -->
-            <div class="card">
-                <div class="card-header">
-                
-                            <!-- tampil seluruh data -->
-                            
-                               
-                    <h3 class="card-title">Hallo <?= $_SESSION['nama']; ?> </h3>
-                    
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body" >
-                    <div class=" max-w-7xl mx-auto sm:px-6 lg:px-8  ">  
-                        <div class="ciah shadow-sm sm:rounded-lg" style=" width: 100%; height: 150vh; background-image: url('https://media.licdn.com/dms/image/D5605AQGeUxt6kfzs5A/feedshare-thumbnail_720_1280/0/1693883976893?e=2147483647&v=beta&t=knBoP755Kd0yNKGUvVK1IuCycgebBBLGNfJy0CFhI38'); backdrop-filter: blur(5px); background-size: cover;  height: 70vh ;    background-size: cover ;    background-position: center ;    background-repeat: no-repeat ;">  
-                            <div> 
-                            <center>
-                            <?php
-                                $this_day = date("d");
-                                $sql = "SELECT * FROM data_absen NATURAL LEFT JOIN tanggal WHERE nama_tgl='$this_day' AND id_user='{$_SESSION['id_akun']}'";
-                                $result = $db->query($sql);
+</div>
+<!-- /.card-header -->
+<div class="card-body" >
+<div class=" max-w-7xl mx-auto sm:px-6 lg:px-8  ">  
+<div class="ciah shadow-sm sm:rounded-lg" style=" width: 100%; height: 150vh; background-image: url('https://media.licdn.com/dms/image/D5605AQGeUxt6kfzs5A/feedshare-thumbnail_720_1280/0/1693883976893?e=2147483647&v=beta&t=knBoP755Kd0yNKGUvVK1IuCycgebBBLGNfJy0CFhI38'); backdrop-filter: blur(5px); background-size: cover;  height: 60vh ;    background-size: cover ;    background-position: center ;    background-repeat: no-repeat ;">  
+    <div> 
+    <center>
+    <?php
+        $this_day = date("d");
+        $sql = "SELECT * FROM data_absen NATURAL LEFT JOIN tanggal WHERE nama_tgl='$this_day' AND id_user='{$_SESSION['id_akun']}'";
+        $result = $db->query($sql);
 
-                                // Notifikasi Absen
-                                if (isset($_GET['ab'])) {
-                                    if ($_GET['ab'] == 1) {
-                                        echo "<div class='alert alert-warning'><strong>Terimakasih, Absen berhasil.</strong></div>";
-                                    } elseif ($_GET['ab'] == 2) {
-                                        echo "<div class='alert alert-danger'><strong>Maaf, Absen Gagal. Silahkan Coba Kembali!</strong></div>";
-                                    }
-                                }
+        // Notifikasi Absen
+        if (isset($_GET['ab'])) {
+            if ($_GET['ab'] == 1) {
+                echo "<div class='alert alert-warning'><strong>Terimakasih, Absen berhasil.</strong></div>";
+            } elseif ($_GET['ab'] == 2) {
+                echo "<div class='alert alert-danger'><strong>Maaf, Absen Gagal. Silahkan Coba Kembali!</strong></div>";
+            }
+        }
 
-                                if ($result->num_rows == 0) {
-                                    $status = './lib/img/warning.png';
-                                    $message = "Anda Belum Mengisi Absen Hari Ini";
-                                    $disable_in = "";
-                                    $disable_out = " disabled='disabled'";
-                                } else {
+        if ($result->num_rows == 0) {
+            $status = './lib/img/warning.png';
+            $message = "Anda Belum Mengisi Absen Hari Ini";
+            $disable_in = "";
+            $disable_out = " disabled='disabled'";
+        } else {
 
-                                    $disable_in = " disabled='disabled'";
+            $disable_in = " disabled='disabled'";
 
-                                    $get_day = $result->fetch_assoc();
-                                    
-                                    if ($get_day['jam_klr'] !== "") {
-                                        $status = './lib/img/complete.png';
-                                        $message = "Absensi hari ini selesai! Terimakasih.";
-                                        $disable_out = " disabled='disabled'";
-                                    } else {
-                                        $status = './lib/img/minus.png';
-                                        $message = "Absen Masuk Selesai. Jangan Lupa Absen Pulang !";
-                                        $disable_out = "";
-                                    }
-                                }
+            $get_day = $result->fetch_assoc();
+            
+            if ($get_day['jam_klr'] !== "") {
+                $status = './lib/img/complete.png';
+                $message = "Absensi hari ini selesai! Terimakasih.";
+                $disable_out = " disabled='disabled'";
+            } else {
+                $status = './lib/img/minus.png';
+                $message = "Absen Masuk Selesai. Jangan Lupa Absen Pulang !";
+                $disable_out = "";
+            }
+        }
 
-                                echo "
-                                    <button type='button' class='btn btn-success' onclick=\"window.location.href='./model/proses.php?absen=1';\" $disable_in style='margin-top:250px;  font-size:25px; border-radius:10px; font-family: roboto;'>Absen Masuk</button>
-                                    <button type='button' class='btn btn-danger' onclick=\"window.location.href='./model/proses.php?absen=2';\" $disable_out style='margin-top:250px; font-size:25px; border-radius:10px; font-family: roboto;'>Absen Pulang</button>
-                                ";
-                                ;
-                                $db->close();
-                                ?>
+        echo "
+            <button type='button' class='btn btn-success' onclick=\"window.location.href='./model/proses.php?absen=1';\" $disable_in style='margin-top:180px;  font-size:18px; border-radius:5px;'>Absen Masuk</button>
+            <button type='button' class='btn btn-danger' onclick=\"window.location.href='./model/proses.php?absen=2';\" $disable_out style='margin-top:180px; font-size:18px; border-radius:5px;'>Absen Pulang</button>
+        ";
+        ;
+        $db->close();
+        ?>
 
                             </div>  
                         </div>  
