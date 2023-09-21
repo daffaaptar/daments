@@ -153,9 +153,7 @@ echo "
     <th rowspan='2' style='text-align: center; vertical-align: middle;'>Tanggal</th>
     <th class='text-center' style='width: 10%;'>Datang</th>
     <th class='text-center' width='10%'>Pulang</th>
-    
     <th rowspan='2' width='10%' style='text-align: center; vertical-align: middle;'>Durasi</th>
-    
     <th rowspan='2' width='50%' style='text-align: center; vertical-align: middle;'>Keterangan/Progres</th>
 </tr>
     </thead>
