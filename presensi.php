@@ -126,7 +126,6 @@ if (isset($_POST['ubah'])) {
 				echo "<div class='alert alert-warning'><strong>Tidak ada Absensi untuk ditampilkan.</strong></div>";
 			}
 	} else {
-	    
 		$query = $db->query("SELECT*FROM akun WHERE id_akun='$id_akun'");
 		$get_user=$query->fetch_assoc();
 		$name = $get_user['nama'];
@@ -139,6 +138,10 @@ if (isset($_POST['ubah'])) {
 			      $year = date("Y");
 			      $id_month=$get_month['id_bln'];
 			      
+					//membuat durasi
+					
+
+
 			      $query_absen=$db->query("SELECT*FROM data_absen NATURAL LEFT JOIN bulan NATURAL JOIN hari NATURAL JOIN tanggal WHERE id_bln='$id_month' AND id_user='$id_user'");
 			      
 			      $cek = $query_absen->num_rows;
@@ -152,45 +155,59 @@ if (isset($_POST['ubah'])) {
                   <th rowspan='2' style='text-align: center; vertical-align: middle;'>Tanggal</th>
                   <th class='text-center' style='width: 10%;'>Datang</th>
                   <th class='text-center' width='10%'>Pulang</th>
-                  <th rowspan='2' class='text-center' width='7%' style='text-align: center; vertical-align: middle;'>Isoma</th>
+                  
                   <th rowspan='2' width='10%' style='text-align: center; vertical-align: middle;'>Durasi</th>
-                  <th class='text-center' style='width: 10%;'>Jumlah</th>
+                  
                   <th rowspan='2' width='50%' style='text-align: center; vertical-align: middle;'>Keterangan/Progres</th>
                 </tr>
 			            </thead>
 			            <tbody>";
-			          $no=0;
-			          while ($get_absen=$query_absen->fetch_assoc()) {
-			            $no++;
-			            $date = "$get_absen[nama_hri], $get_absen[nama_tgl] $get_absen[nama_bln] ".date("Y");
-			            $time_in = "$get_absen[jam_msk]";
-			             if ($get_absen['jam_klr']==="") {
-			             	$time_out = "<strong>Belum Absen</strong>";
-			             } else {
-			             	$time_out = "$get_absen[jam_klr]";
-			             }
-			            
-			            echo "<tr>
-			                <td>$no</td>
-			                <td>$date</td>
-			                <td>$time_in</td>
-			                <td>$time_out</td>
-			                <td></td>
-			                <td></td>
-			                <td></td>
-			                <td></td>
-			                
-			              </tr>";
-			          }
-			          echo "</table></div>";
-			      	}
-				}
-				$db->close();
-			} else {
-				echo "<div class='alert alert-warning'><strong>Tidak ada Absensi untuk ditampilkan.</strong></div>";
-			}
-	}
-?>
+                  $no = 0;
+                  while ($get_absen = $query_absen->fetch_assoc()) {
+                      $no++;
+                      $date = "{$get_absen['nama_hri']}, {$get_absen['nama_tgl']} {$get_absen['nama_bln']} " . date("Y");
+                      $time_in = $get_absen['jam_msk'];
+                      $time_out = $get_absen['jam_klr'];
+
+                      if ($time_out === "") {
+                          $time_out = "<strong>Belum Absen</strong>";
+                          $selisih_waktu = ""; // Tidak ada selisih waktu jika jam keluar kosong
+                          $keterangan = ""; // Tidak ada keterangan jika jam keluar kosong
+                      } else {
+
+                        
+                          // Ubah string ke objek DateTime
+                          $masuk = DateTime::createFromFormat('H.i', $time_in);
+                          $keluar = DateTime::createFromFormat('H.i', $time_out);
+
+                          if ($masuk && $keluar) {
+                              // Hitung selisih waktu hanya jika format waktu valid
+                              $selisih_waktu = $masuk->diff($keluar);
+                              $keterangan = "Hadir"; // Tambahkan keterangan "Hadir"
+                          } else {
+                              $selisih_waktu = "<strong>Format waktu tidak valid</strong>";
+                              $keterangan = ""; // Tidak ada keterangan jika format waktu tidak valid
+                          }
+                      }
+
+                      echo "<tr>
+                          <td>$no</td>
+                          <td>$date</td>
+                          <td>$time_in</td>
+                          <td>$time_out</td>
+                          <td>" . ($selisih_waktu instanceof DateInterval ? $selisih_waktu->format('%H jam %i menit') : $selisih_waktu) . "</td>
+                          <td>$keterangan</td>
+                        </tr>";
+                  }
+                  echo "</table></div>";
+                                }
+                          }
+                          $db->close();
+                        } else {
+                          echo "<div class='alert alert-warning'><strong>Tidak ada Absensi untuk ditampilkan.</strong></div>";
+                        }
+                    }
+                  ?>
                                 
                             </div>
                         </div>

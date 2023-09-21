@@ -66,8 +66,8 @@ elseif (isset($_GET['absen'])) {
 			if ($statement->execute()) {
 				// Absen sukses
 				$db->close();
-				header("location:../absen&ab=1");
-				
+				header("location:../absen.php");
+				alert('selamat pagi!');
 			} else {
 				header("location:../absen&ab=2");
 			}
@@ -91,7 +91,8 @@ elseif (isset($_GET['absen'])) {
 				);
 			if ($statement->execute()) {
 				$db->close();
-				header("location:../absen&ab=1");
+				header("location:../absen.php");
+				alert('Jangan Lupa Mengisi Activity!');
 
 			} else {
 				header("location:../absen&ab=2");
