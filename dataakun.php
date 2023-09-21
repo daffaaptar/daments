@@ -24,6 +24,29 @@ $data_bylogin = select("SELECT * FROM akun WHERE id_akun = $id_akun");
 
 // jika tombol tambah di tekan jalankan script berikut
 if (isset($_POST['tambah'])) {
+    // Validasi email jika sama
+    $email = $_POST['email'];
+    $existing_email = select("SELECT email FROM akun WHERE email = '$email'");
+    if ($existing_email) {
+        echo "<script>
+                alert('Email sudah terdaftar. Gunakan email lain.');
+                document.location.href = 'dataakun.php';
+              </script>";
+        exit;
+    }
+
+    // Validasi username jika sama
+    $username = $_POST['username'];
+    $existing_username = select("SELECT username FROM akun WHERE username = '$username'");
+    if ($existing_username) {
+        echo "<script>
+                alert('Username sudah terdaftar. Gunakan username lain.');
+                document.location.href = 'dataakun.php';
+              </script>";
+        exit;
+    }
+
+    // Lanjutkan dengan penambahan data akun jika email dan username valid
     if (create_akun($_POST) > 0) {
         echo "<script>
                 alert('Data Akun Berhasil Ditambahkan');
@@ -36,9 +59,26 @@ if (isset($_POST['tambah'])) {
               </script>";
     }
 }
-
-// jika tombol ubah di tekan jalankan script berikut
+// Jika tombol ubah ditekan
 if (isset($_POST['ubah'])) {
+    // Ambil id_akun yang sedang diubah
+    $id_akun = $_POST['id_akun'];
+
+    // Ambil username yang baru dimasukkan oleh pengguna
+    $new_username = $_POST['username'];
+
+    // Cek apakah username yang baru dimasukkan sudah ada selain dari akun yang sedang diubah
+    $existing_username = select("SELECT username FROM akun WHERE username = '$new_username' AND id_akun != $id_akun");
+
+    if ($existing_username) {
+        echo "<script>
+                alert('Username sudah terdaftar. Gunakan username lain.');
+                document.location.href = 'dataakun.php';
+              </script>";
+        exit;
+    }
+
+    // Lanjutkan dengan perubahan data akun jika username valid
     if (update_akun($_POST) > 0) {
         echo "<script>
                 alert('Data Akun Berhasil Diubah');
@@ -86,18 +126,18 @@ if (isset($_POST['ubah'])) {
                         <button type="button" class="btn btn-primary btn-sm mb-1" data-toggle="modal" data-target="#modalTambah"><i class="fas fa-plus"></i> Tambah Akun</button>
                     <?php endif; ?>
 
-                    <table class="table table-bordered table-hover mt-3">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Role</th>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Aksi</th>
-                            </tr>
-                          </thead>
-                        </div>
+        <table class="table table-bordered table-hover mt-3">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Role</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Aksi</th>
+                </tr>
+                </thead>
+            </div>
                     <tbody>
         <?php $no = 1; ?>
         <!-- tampil seluruh data -->
@@ -148,15 +188,16 @@ if (isset($_POST['ubah'])) {
 </div>
 
 <!-- Modal Tambah -->
-<div class="modal fade" id="modalTambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-  <div class="modal-content">
-      <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-plus"></i> Tambah Akun</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-          </button>
-      </div>
+<div class="modal fade" id="modalTambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-plus"></i> Tambah Akun</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
       <div class="modal-body">
           <form action="" method="post">
               <div class="form-group">
@@ -200,7 +241,7 @@ if (isset($_POST['ubah'])) {
 
 <!-- Modal Ubah -->
 <?php foreach ($data_akun as $akun) : ?>
-    <div class="modal fade" id="modalUbah<?= $akun['id_akun']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalUbah<?= $akun['id_akun']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
