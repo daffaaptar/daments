@@ -173,6 +173,7 @@ if (isset($_POST['ubah'])) {
 																$date = "{$get_absen['nama_hri']}, {$get_absen['nama_tgl']} {$get_absen['nama_bln']} " . date("Y");
 																$time_in = $get_absen['jam_msk'];
 																$time_out = $get_absen['jam_klr'];
+																$keterangan = $get_absen['keterangan'];
 
 																if ($time_out === "") {
 																		$time_out = "<strong>Belum Absen</strong>";
@@ -199,7 +200,7 @@ if (isset($_POST['ubah'])) {
 																		<td>$time_in</td>
 																		<td>$time_out</td>
 																		<td>" . ($selisih_waktu instanceof DateInterval ? $selisih_waktu->format('%H jam %i menit') : $selisih_waktu) . "</td>
-																		<td></td>
+																		<td>$keterangan</td>
 																	</tr>";
 														}
 														echo "</table>";
