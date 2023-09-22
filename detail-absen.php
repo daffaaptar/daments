@@ -16,14 +16,14 @@ $title = 'Detail Absensi';
 include 'layout/header.php';
 
 // Ambil parameter ID dari URL
-$id_user = $_GET['id_akun'];
+$id_user = $_GET['id_user'];
 
 
 // Query basis data untuk mengambil data absensi berdasarkan ID
 $query_absen = select("SELECT * FROM data_absen WHERE id_user = $id_user");
 
 // Query basis data untuk mengambil nama akun
-$query_nama = select("SELECT nama FROM akun WHERE id_user = $id_user");
+$query_nama = select("SELECT nama FROM akun WHERE id_akun = $id_user");
 $nama_akun = $query_nama[0]['nama'];
 
 ?>
