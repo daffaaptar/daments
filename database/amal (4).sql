@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Sep 2023 pada 14.45
+-- Waktu pembuatan: 22 Sep 2023 pada 09.26
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -41,13 +41,18 @@ CREATE TABLE `akun` (
 --
 
 INSERT INTO `akun` (`id_akun`, `nama`, `username`, `email`, `password`, `level`) VALUES
-(1, 'Ilham Lutfi', 'admin', 'ilham@gmail.com', '$2y$10$dWlZGz7dRVAISidFmCanNuo20R2mK6anWNla88BcHybYlpGMc8oAu', 'super-admin'),
-(2, 'Operator Barang', 'opmbarang', 'opmbarang@gmail.com', '$2y$10$EkUKRHbIEazXpxWiJ0pUrOUcNPgjny61lU.2AUzTNC5uEIvntLglG', 'admin'),
+(1, 'Daffa Apta Pratama', 'daffa', 'daffaaptapratama@gmail.com', '$2y$10$iU4cCOAfv6Rg/QubpthPEum17.9hmPeIKUPUFLi7WttGb6pu9GFI.', 'super-admin'),
+(2, 'Operator Barang', 'opmbarang', 'opmbarang@gmail.com', '$2y$10$9p4vVp70RZb1K2tT/Xy6N.9J0VZ7j83dHzX3udo4SCe1UKoF9ALoW', 'admin'),
 (3, 'Operator Mahasiswa', 'karyawan', 'opmahasiswa@gmail.com', '$2y$10$tuxOq2cB86bpg8aBe/iSR.TQgccfu943g0a0x7U7FjK7l48IrquB2', 'karyawan'),
 (10, 'anjas', 'anjas', 'anja@gmail.com', '$2y$10$Sj66YgEMYTwDtFMQFtmcjer1eROBuyVgujIileMhEaKyO9wOlZubm', 'karyawan'),
 (12, 'galang', 'galang', 'galang@gmail.com', '$2y$10$aT6L1qETkz3oI4y/swRl1e76ZQseE08brytVG5DCpJ7igk7nMe/yS', 'karyawan'),
 (13, 'Maul', 'maul', 'maul@gmail.com', '$2y$10$5/ihV7KYB6dWG30dnoIV4u8zj5G0i2L36A6eQRe8H5B2x2InvUmg.', 'karyawan'),
-(16, 'dapa', 'dapa', 'dapa@gmail.com', '$2y$10$eN2uLP/ej8sherE.ANnzve3tFWUY1kz0EewF.opNlpA23WWU05nt.', 'karyawan');
+(16, 'dapa', 'dapa', 'dapa@gmail.com', '$2y$10$eN2uLP/ej8sherE.ANnzve3tFWUY1kz0EewF.opNlpA23WWU05nt.', 'karyawan'),
+(25, 'karyawan edan', 'edan', 'edankeun@gmail.com', '$2y$10$8M95tahFYL3K3AuOUeUzp.k899GRKn5BiRQKzg7isIcjRwLwc7F22', 'karyawan'),
+(26, 'user', 'user', 'user@gmail.com', '$2y$10$GrN9LBPbuZSo28po.rO.nuSiqemQC3O9aDmJ/q7xWk9VFqc68AfYS', 'karyawan'),
+(27, 'userbaru', 'userbaru', 'userbaru@gmail.com', '$2y$10$8Hd2HcaWZ5fxUDTM4a91ZO1Cap/QTy5T6IGk6LOr0xi5TlB/mlNeq', 'karyawan'),
+(28, 'karyawan', 'barulagi', 'baru@gmail.com', '$2y$10$mFGn7fYCM087G0ssO7YRfevpspN/6a2RMsyjrWOfinQ6GxvZMcfBO', 'karyawan'),
+(29, 'useredan', 'useredan', 'useredan@gmail.com', '$2y$10$OhN7ntCbFx1F0FZf.pZhC.kKanz.f2gRGyaQ1jcmbOL3z9BLcvLX2', 'karyawan');
 
 -- --------------------------------------------------------
 
@@ -93,19 +98,28 @@ CREATE TABLE `data_absen` (
   `jam_msk` varchar(50) NOT NULL,
   `st_jam_msk` varchar(123) NOT NULL,
   `jam_klr` varchar(50) NOT NULL,
-  `st_jam_klr` varchar(123) NOT NULL
+  `st_jam_klr` varchar(123) NOT NULL,
+  `keterangan` varchar(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data untuk tabel `data_absen`
 --
 
-INSERT INTO `data_absen` (`id_absen`, `id_user`, `id_bln`, `id_hri`, `id_tgl`, `jam_msk`, `st_jam_msk`, `jam_klr`, `st_jam_klr`) VALUES
-(1, '10', 9, 3, 20, '09.28 WIB', '', '09.32 WIB', ''),
-(2, '3', 9, 3, 20, '09.28 WIB', '', '09.30 WIB', ''),
-(3, '12', 9, 3, 20, '14.12 WIB', 'Menunggu', '14.12 WIB', 'Menunggu'),
-(4, '13', 9, 3, 20, '14.44 WIB', 'Menunggu', '14.44 WIB', 'Menunggu'),
-(5, '16', 9, 3, 20, '14.52 WIB', 'Menunggu', '14.52 WIB', 'Menunggu');
+INSERT INTO `data_absen` (`id_absen`, `id_user`, `id_bln`, `id_hri`, `id_tgl`, `jam_msk`, `st_jam_msk`, `jam_klr`, `st_jam_klr`, `keterangan`) VALUES
+(1, '10', 9, 3, 20, '09.28 WIB', '', '09.32 WIB', '', ''),
+(2, '3', 9, 3, 20, '09.28 WIB', '', '09.30 WIB', '', ''),
+(3, '12', 9, 3, 20, '14.12 WIB', 'Menunggu', '14.12 WIB', 'Menunggu', ''),
+(4, '13', 9, 3, 20, '14.44 WIB', 'Menunggu', '14.44 WIB', 'Menunggu', ''),
+(5, '16', 9, 3, 20, '14.52 WIB', 'Menunggu', '14.52 WIB', 'Menunggu', ''),
+(6, '3', 9, 4, 21, '11:08', 'Menunggu', '11:08', 'Menunggu', ''),
+(7, '25', 9, 4, 21, '11:28', 'Menunggu', '11:29', 'Menunggu', ''),
+(8, '12', 9, 4, 21, '11:31', 'Menunggu', '11:31', 'Menunggu', ''),
+(9, '26', 9, 4, 21, '13:57', 'Menunggu', '13:57', 'Menunggu', ''),
+(10, '27', 9, 4, 21, '15:17', 'Menunggu', '15:57', 'Menunggu', ''),
+(11, '28', 9, 4, 21, '16:52', 'Menunggu', '16:53', 'Menunggu', ''),
+(12, '29', 9, 4, 21, '16:56', 'Menunggu', '16:56', 'Menunggu', ''),
+(13, '12', 9, 5, 22, '10:01', 'Menunggu', '11:15', 'Menunggu', '');
 
 -- --------------------------------------------------------
 
@@ -221,7 +235,7 @@ ALTER TABLE `tanggal`
 -- AUTO_INCREMENT untuk tabel `akun`
 --
 ALTER TABLE `akun`
-  MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_akun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT untuk tabel `bulan`
@@ -233,7 +247,7 @@ ALTER TABLE `bulan`
 -- AUTO_INCREMENT untuk tabel `data_absen`
 --
 ALTER TABLE `data_absen`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT untuk tabel `hari`
