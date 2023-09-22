@@ -65,7 +65,7 @@ $data_mahasiswa = select("SELECT * FROM mahasiswa ORDER BY id_mahasiswa DESC");
                                 <th>Aksi</th>
                             </tr>
                         </thead>
-
+<form action="" method="post"></form>
                         <tbody>
                             <?php $no = 1; ?>
                             <?php foreach ($data_mahasiswa as $mahasiswa) : ?>

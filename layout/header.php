@@ -55,63 +55,71 @@ include 'config/app.php';
                 <span class="brand-text font-weight-light"></span>
             </a> -->
 
-            <!-- Sidebar -->
-            <div class="sidebar">
-                <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="assets-template/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-                    </div>
-                    <div class="info">
-                        <a href="#" class="d-block"><?= $_SESSION['nama']; ?></a>
-                    </div>
-                </div>
-
+<!-- Sidebar -->
+<div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+            <img src="assets-template/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+            <a href="#" class="d-block"><?= $_SESSION['nama']; ?></a>
+        </div>
+    </div>
                 <!-- Sidebar Menu -->
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                        <li class="nav-header">Daftar Menu</li>
+<nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-header">Daftar Menu</li>
 
-                        <?php if ($_SESSION['level'] == "karyawan") : ?>
-                            <li class="nav-item">
-                                <a href="presensi.php" class="nav-link">
-                                    <i class="nav-icon fas fa-list"></i>
-                                    <p>
-                                        Report
-                                    </p>
-                                </a>
-                            </li>
-                            <?php endif; ?>
+        <?php if ($_SESSION['level'] == "karyawan") : ?>
+            <li class="nav-item">
+                <a href="presensi.php" class="nav-link">
+                    <i class="nav-icon fas fa-list"></i>
+                    <p>
+                        Report
+                    </p>
+                </a>
+            </li>
+            <?php endif; ?>
 
-                            <?php if ($_SESSION['level'] == "karyawan") : ?>
-                        <li class="nav-item">
-                            <a href="absen.php" class="nav-link">
-                                    <i class="nav-icon fas fa-user-cog"></i>
-                                        <p>
-                                            Absen
-                                        </p>
-                                </a>
-                            </li>
-                            <?php endif; ?>
-                        
-                            <li class="nav-item">
-                                <a href="dataakun.php" class="nav-link">
-                                    <i class="nav-icon fas fa-users"></i>
-                                    <p>
-                                        Data Akun
-                                    </p>
-                                </a>
-                            </li>
-                        
+            <?php if ($_SESSION['level'] == "karyawan") : ?>
+        <li class="nav-item">
+            <a href="absen.php" class="nav-link">
+                    <i class="nav-icon fas fa-user-cog"></i>
+                        <p>
+                            Absen
+                        </p>
+                </a>
+            </li>
+            <?php endif; ?>
+        
+            <li class="nav-item">
+                <a href="dataakun.php" class="nav-link">
+                    <i class="nav-icon fas fa-users"></i>
+                    <p>
+                        Data Karyawan
+                    </p>
+                </a>
+            </li>
 
-                        <li class="nav-item">
-                            <a href="logout.php" class="nav-link">
-                                <i class="nav-icon fas fa-sign-out-alt"></i>
-                                <p>
-                                    Keluar
-                                </p>
-                            </a>
-                        </li>
+            <li class="nav-item">
+                <a href="absensi-akun.php" class="nav-link">
+                    <i class="nav-icon fas fa-book"></i>
+                    <p>
+                        Rekap Absensi
+                    </p>
+                </a>
+            </li>
+        
+
+        <li class="nav-item">
+            <a href="logout.php" class="nav-link">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p>
+                    Keluar
+                </p>
+            </a>
+        </li>
 
                     </ul>
                 </nav>

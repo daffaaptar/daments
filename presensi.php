@@ -20,7 +20,9 @@ $data_akun = select("SELECT * FROM akun");
 
 // tampil data berdasarkan user login
 $id_akun = $_SESSION['id_akun'];
+
 $data_bylogin = select("SELECT * FROM akun WHERE id_akun = $id_akun");
+
 
 // jika tombol tambah di tekan jalankan script berikut
 if (isset($_POST['tambah'])) {
@@ -144,71 +146,98 @@ $query_absen=$db->query("SELECT*FROM data_absen NATURAL LEFT JOIN bulan NATURAL 
 
 $cek = $query_absen->num_rows;
 if ($cek!==0) {
-echo "<br>  <h5 class='sub-header' style='text-align:center;'><br>Bulan: $month $year </h5>";
-echo "
-<table class='table table-bordered table-hover mt-3'>
-    <thead>
-    <tr>
-    <th rowspan='2' style='text-align: center; vertical-align: middle;'>NO</th>
-    <th rowspan='2' style='text-align: center; vertical-align: middle;'>Tanggal</th>
-    <th class='text-center' style='width: 10%;'>Datang</th>
-    <th class='text-center' width='10%'>Pulang</th>
-    
-    <th rowspan='2' width='10%' style='text-align: center; vertical-align: middle;'>Durasi</th>
-    
-    <th rowspan='2' width='50%' style='text-align: center; vertical-align: middle;'>Keterangan/Progres</th>
-</tr>
-    </thead>
-    <tbody>";
-    $no = 0;
-    while ($get_absen = $query_absen->fetch_assoc()) {
-            $no++;
-            $date = "{$get_absen['nama_hri']}, {$get_absen['nama_tgl']} {$get_absen['nama_bln']} " . date("Y");
-            $time_in = $get_absen['jam_msk'];
-            $time_out = $get_absen['jam_klr'];
+    echo "<br>  <h5 class='sub-header' style='text-align:center;'><br>Bulan: $month $year </h5>";
+    echo "
+        <table class='table table-bordered table-hover mt-3'>
+            <thead>
+            <tr>
+            <th rowspan='2' style='text-align: center; vertical-align: middle;'>NO</th>
+            <th rowspan='2' style='text-align: center; vertical-align: middle;'>Tanggal</th>
+            <th class='text-center' style='width: 10%;'>Datang</th>
+            <th class='text-center' width='10%'>Pulang</th>
+            
+            <th rowspan='2' width='10%' style='text-align: center; vertical-align: middle;'>Durasi</th>
+            
+            <th rowspan='2' width='50%' style='text-align: center; vertical-align: middle;'>Keterangan/Progres</th>
+        </tr>
+            </thead>
+            <tbody>";
+            $no = 0;
+            while ($get_absen = $query_absen->fetch_assoc()) {
+                    $no++;
+                    $date = "{$get_absen['nama_hri']}, {$get_absen['nama_tgl']} {$get_absen['nama_bln']} " . date("Y");
+                    $time_in = $get_absen['jam_msk'];
+                    $time_out = $get_absen['jam_klr'];
+                    $keterangan = $get_absen['keterangan'];
 
-            if ($time_out === "") {
-                    $time_out = "<strong>Belum Absen</strong>";
-                    $selisih_waktu = ""; // Tidak ada selisih waktu jika jam keluar kosong
-                    
+if ($time_out === "") {
+$time_out = "<strong>Belum Absen</strong>";
+$selisih_waktu = ""; // Tidak ada selisih waktu jika jam keluar kosong
+
+} else {
+
+
+$masuk = DateTime::createFromFormat('H:i', $time_in);
+$keluar = DateTime::createFromFormat('H:i', $time_out);
+
+if ($masuk && $keluar) {
+$selisih_waktu = $masuk->diff($keluar);
+
+} else {
+$selisih_waktu = "<strong>Format waktu tidak valid</strong>";
+
+}
+}
+
+        echo "<tr>
+                <td>$no</td>
+                <td>$date</td>
+                <td>$time_in</td>
+                <td>$time_out</td>
+                <td>" . ($selisih_waktu instanceof DateInterval ? $selisih_waktu->format('%H jam %i menit') : $selisih_waktu) . "</td>
+                <td style='text-align:right;'> $keterangan <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#keluar'  style='  font-size:18px; border-radius:5px;'>
+                Masuk Keterangan
+                </button> </td>
+            </tr>";
+}
+echo "</table>";
+                            }
+                }
+                $db->close();
             } else {
-
-                
-                $masuk = DateTime::createFromFormat('H:i', $time_in);
-                $keluar = DateTime::createFromFormat('H:i', $time_out);
-                
-                if ($masuk && $keluar) {
-                        $selisih_waktu = $masuk->diff($keluar);
-                        
-                } else {
-                        $selisih_waktu = "<strong>Format waktu tidak valid</strong>";
-                        
-                }
+                echo "<div class='alert alert-warning'><strong>Tidak ada Absensi untuk ditampilkan.</strong></div>";
             }
-
-            echo "<tr>
-                    <td>$no</td>
-                    <td>$date</td>
-                    <td>$time_in</td>
-                    <td>$time_out</td>
-                    <td>" . ($selisih_waktu instanceof DateInterval ? $selisih_waktu->format('%H jam %i menit') : $selisih_waktu) . "</td>
-                    <td></td>
-                </tr>";
     }
-    echo "</table>";
-                                }
-                    }
-                    $db->close();
-                } else {
-                    echo "<div class='alert alert-warning'><strong>Tidak ada Absensi untuk ditampilkan.</strong></div>";
-                }
-        }
-    ?>
+?>
 
 
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 </div>
+
+<div class='modal fade' id='keluar' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <h5 class='modal-title' id='staticBackdropLabel'><i class='fas fa-sign-out-alt'></i>Keterangan</h5>
+        <button type='button' class='close' data-bs-dismiss='modal' aria-label='Close'>
+            <span aria-hidden='true'>&times;</span>
+        </button>
+      </div>
+      <div class='modal-body'>
+      <form action='' method='post'>
+      <label for='keterangan'>Masukan keterangan hari ini :</label>
+      <input type='text' id='keterangan' name='keterangan'  class='form-control' >
+      <input type='hidden' name='absen' value='1'>
+      </form>
+      <div class='modal-footer'>
+        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Batal</button>
+        <button type="button"  name="ubah" class="btn btn-primary">Save changes</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <?php include 'layout/footer.php'; ?>

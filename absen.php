@@ -123,9 +123,7 @@ if ($_SESSION["level"] != "karyawan") {
 
         echo "
             <button type='button' class='btn btn-success' onclick=\"window.location.href='./model/proses.php?absen=1';\" $disable_in style='margin-top:180px;  font-size:18px; border-radius:5px;'>Absen Masuk</button>
-            <button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#keluar' $disable_out style='margin-top:180px;  font-size:18px; border-radius:5px;'>
-            Absen Keluar
-            </button>   
+            <button type='button' class='btn btn-danger' onclick=\"window.location.href='./model/proses.php?absen=2';\" $disable_out style='margin-top:180px;  font-size:18px; border-radius:5px;'>Absen Keluar</button>   
         ";
         ;
         $db->close();
@@ -153,12 +151,15 @@ echo "
         </button>
       </div>
       <div class='modal-body'>
-      Masukan keterangan hari ini :
-      <input type='text' class='form-control'>
-      </div>
+      <form action='modal/proses.php' method='post'>
+      <label for='keterangan'>Masukan keterangan hari ini :</label>
+      <input type='text' id='keterangan' name='keterangan'  class='form-control'>
+      <input type='hidden' name='absen' value='1'>
+      </form>
       <div class='modal-footer'>
         <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Batal</button>
         <button type='button' class='btn btn-danger' onclick=\"window.location.href='./model/proses.php?absen=2';\" $disable_out>Absen Keluar</button>
+      </div>
       </div>
     </div>
   </div>
