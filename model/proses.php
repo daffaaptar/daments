@@ -40,53 +40,50 @@ elseif (isset($_GET['logout'])) {
 //
 /**********************************************************/
 elseif (isset($_GET['absen'])) {
- if($_GET['absen']==1){
-  $month = date("m");
-  $day_tgl = date("d");
-  $day = date("N");
-  $hour = date("H:i");
-  $status = "Menunggu";
-	$keterangan = "Belum Memasukan keterangan";
-  $sql = "INSERT INTO data_absen (
-   id_user,
-   id_bln,
-   id_hri,
-   id_tgl,
-   jam_msk,
-   st_jam_msk,
-	 keterangan) VALUES (
-   ?,
-   ?,
-   ?,
-   ?,
-   ?,
-   ?,
-   ?)";
-  if ($statement = $db->prepare($sql)) {
-   $statement->bind_param(
-    "iiiiss", $_SESSION['id_akun'], $month, $day, $day_tgl, $hour, $status
-    );
-   if ($statement->execute()) {
-    // Absen sukses
-    $db->close();
-    header("location:../absen.php");
-   } else {
-    header("location:../absen&ab=2");
-   }
-  }else {
-   header("location:../absen&ab=2");
-  }
-  
- } else {
-  // Absensi pulang -> melakukan Update jam pulang
-  $id_user = mysqli_real_escape_string($db, $_SESSION['id_akun']);
-  $id_bln = date("m");
-  $day_tgl = date("d");
-  $day = date("N");
-  $hour = date("H:i");
-  $status = "Menunggu";
-  
-  $sql = "UPDATE data_absen SET jam_klr=?, st_jam_klr=? WHERE id_user='$id_user' AND id_tgl='$day_tgl' AND id_bln='$id_bln'";
+	if($_GET['absen']==1){
+		$month = date("m");
+		$day_tgl = date("d");
+		$day = date("N");
+		$hour = date("H:i");
+		$status = "Menunggu";
+		$sql = "INSERT INTO data_absen (
+			id_user,
+			id_bln,
+			id_hri,
+			id_tgl,
+			jam_msk,
+			st_jam_msk) VALUES (
+			?,
+			?,
+			?,
+			?,
+			?,
+			?)";
+		if ($statement = $db->prepare($sql)) {
+			$statement->bind_param(
+				"iiiiss", $_SESSION['id_akun'], $month, $day, $day_tgl, $hour, $status
+				);
+			if ($statement->execute()) {
+				// Absen sukses
+				$db->close();
+				header("location:../absen.php");
+				alert('selamat pagi!');
+			} else {
+				header("location:../absen&ab=2");
+			}
+		}else {
+			header("location:../absen&ab=2");
+		}
+		
+	} else {
+		// Absensi pulang -> melakukan Update jam pulang
+		$id_user = mysqli_real_escape_string($db, $_SESSION['id_akun']);
+		$id_bln = date("m");
+		$day_tgl = date("d");
+		$day = date("N");
+		$hour = date("H:i");
+		$status = "Menunggu";
+		$sql = "UPDATE data_absen SET jam_klr=?, st_jam_klr=? WHERE id_user='$id_user' AND id_tgl='$day_tgl' AND id_bln='$id_bln'";
 
   if ($statement= $db->prepare($sql)) {
    $statement->bind_param(

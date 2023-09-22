@@ -123,9 +123,7 @@ if ($_SESSION["level"] != "karyawan") {
 
         echo "
             <button type='button' class='btn btn-success' onclick=\"window.location.href='./model/proses.php?absen=1';\" $disable_in style='margin-top:180px;  font-size:18px; border-radius:5px;'>Absen Masuk</button>
-            <button type='button' class='btn btn-danger' data-bs-toggle='modal' data-bs-target='#keluar' $disable_out style='margin-top:180px;  font-size:18px; border-radius:5px;'>
-            Absen Keluar
-            </button>   
+            <button type='button' class='btn btn-danger' onclick=\"window.location.href='./model/proses.php?absen=2';\" $disable_out style='margin-top:180px;  font-size:18px; border-radius:5px;'>Absen Keluar</button>   
         ";
         ;
         $db->close();
