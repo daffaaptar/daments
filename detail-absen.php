@@ -11,6 +11,16 @@ if (!isset($_SESSION["login"])) {
 } 
  
 $title = 'Detail Absensi'; 
+
+// membatasi halaman sesuai user login
+if ($_SESSION["level"] != "super-admin") {
+  echo "<script>
+          alert('Perhatian anda tidak punya hak akses');
+          window.history.back(); 
+        </script>";
+  exit;
+}
+
  
 include 'layout/header.php'; 
  

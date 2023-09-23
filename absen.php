@@ -11,6 +11,15 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 
+// membatasi halaman sesuai user login
+if ($_SESSION["level"] != "karyawan") {
+    echo "<script>
+            alert('Perhatian anda tidak punya hak akses');
+            window.history.back(); 
+          </script>";
+    exit;
+  }
+
 $title = 'Daftar Akun';
 
 include 'layout/header.php';
