@@ -76,13 +76,13 @@ include 'config/app.php';
                 <a href="presensi.php" class="nav-link">
                     <i class="nav-icon fas fa-list"></i>
                     <p>
-                        Report
+                        Rekap Absen
                     </p>
                 </a>
             </li>
             <?php endif; ?>
 
-            <?php if ($_SESSION['level'] == "karyawan") : ?>
+            <?php if ($_SESSION['level'] == "karyawan" ) : ?>
         <li class="nav-item">
             <a href="absen.php" class="nav-link">
                     <i class="nav-icon fas fa-user-cog"></i>
@@ -92,7 +92,19 @@ include 'config/app.php';
                 </a>
             </li>
             <?php endif; ?>
-        
+
+            <?php if ($_SESSION['level'] == "karyawan") : ?>
+        <li class="nav-item">
+            <a href="activity.php" class="nav-link">
+                    <i class="nav-icon fas fa-user-cog"></i>
+                        <p>
+                            Activity
+                        </p>
+                </a>
+            </li>
+            <?php endif; ?>
+
+            <?php if ($_SESSION['level'] == "super-admin" || $_SESSION['level'] == "admin") : ?>
             <li class="nav-item">
                 <a href="dataakun.php" class="nav-link">
                     <i class="nav-icon fas fa-users"></i>
@@ -101,7 +113,9 @@ include 'config/app.php';
                     </p>
                 </a>
             </li>
-            <?php if ($_SESSION['level'] == "super-admin" or $_SESSION['level'] == "admin" ) : ?>
+            <?php endif; ?>
+
+            <?php if ($_SESSION['level'] == "super-admin" || $_SESSION['level'] == "admin") : ?>
             <li class="nav-item">
                 <a href="absensi-akun.php" class="nav-link">
                     <i class="nav-icon fas fa-book"></i>
@@ -111,7 +125,7 @@ include 'config/app.php';
                 </a>
             </li>
             <?php endif; ?>
-
+        
         <li class="nav-item">
             <a href="logout.php" class="nav-link">
                 <i class="nav-icon fas fa-sign-out-alt"></i>

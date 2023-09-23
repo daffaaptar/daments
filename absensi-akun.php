@@ -219,57 +219,56 @@ if (isset($_POST['ubah'])) {
 <?php foreach ($data_akun as $akun) : ?>
     <div class="modal fade" id="modalUbah<?= $akun['id_akun']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit"></i> Ubah Akun</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="post">
-                        <input type="hidden" name="id_akun" value="<?= $akun['id_akun']; ?>">
+  <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit"></i> Ubah Akun</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="modal-body">
+    <form action="" method="post">
+        <input type="hidden" name="id_akun" value="<?= $akun['id_akun']; ?>">
 
-                        <div class="form-group">
-                            <label for="nama">Nama</label>
-                            <input type="text" name="nama" id="nama" class="form-control" value="<?= $akun['nama']; ?>" required>
-                        </div>
+        <div class="form-group">
+            <label for="nama">Nama</label>
+            <input type="text" name="nama" id="nama" class="form-control" value="<?= $akun['nama']; ?>" required>
+        </div>
 
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" name="username" id="username" class="form-control" value="<?= $akun['username']; ?>" required>
-                        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" class="form-control" value="<?= $akun['username']; ?>" required>
+        </div>
 
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" name="email" id="email" class="form-control" value="<?= $akun['email']; ?>" required>
-                        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" class="form-control" value="<?= $akun['email']; ?>" required>
+        </div>
 
-                        <div class="form-group">
-                            <label for="password">Password <small>(Masukkan password baru/lama)</small></label>
-                            <input type="password" name="password" id="password" class="form-control" required minlength="6">
-                        </div>
-
-                        <?php if ($_SESSION['level'] == 1) : ?>
-                            <div class="form-group">
-                                <label for="level">Level</label>
-                                <select name="level" id="level" class="form-control" required>
-                                    <?php $level = $akun['level']; ?>
-                                    <option value="" <?= $level == '' ? 'selected' : null ?>>~~Pilih Role~~</option>
-                                    <option value="Super Admin" <?= $level == 'Super Admin' ? 'selected' : null ?>>Super Admin</option>
-                                    <option value="Admin" <?= $level == 'Admin' ? 'selected' : null ?>>Admin</option>
-                                    <option value="Karyawan" <?= $level == 'Karyawan' ? 'selected' : null ?>>Karyawan</option>
-                                </select>
-                            </div>
-                        <?php else : ?>
-                            <input type="hidden" name="level" value="<?= $akun['level']; ?>">
-                        <?php endif; ?>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                    <button type="submit" name="ubah" class="btn btn-primary">Ubah</button>
-                </div>
-                </form>
+        <div class="form-group">
+            <label for="password">Password <small>(Masukkan password baru/lama)</small></label>
+            <input type="password" name="password" id="password" class="form-control" required minlength="6">
+        </div>
+        <?php if ($_SESSION['level'] == 1) : ?>
+            <div class="form-group">
+                <label for="level">Level</label>
+                <select name="level" id="level" class="form-control" required>
+                    <?php $level = $akun['level']; ?>
+                    <option value="" <?= $level == '' ? 'selected' : null ?>>~~Pilih Role~~</option>
+                    <option value="Super Admin" <?= $level == 'Super Admin' ? 'selected' : null ?>>Super Admin</option>
+                    <option value="Admin" <?= $level == 'Admin' ? 'selected' : null ?>>Admin</option>
+                    <option value="Karyawan" <?= $level == 'Karyawan' ? 'selected' : null ?>>Karyawan</option>
+                </select>
+            </div>
+        <?php else : ?>
+            <input type="hidden" name="level" value="<?= $akun['level']; ?>">
+        <?php endif; ?>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+          <button type="submit" name="ubah" class="btn btn-primary">Ubah</button>
+      </div>
+      </form>
             </div>
         </div>
     </div>
