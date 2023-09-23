@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 22 Sep 2023 pada 09.26
+-- Waktu pembuatan: 23 Sep 2023 pada 19.17
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -119,7 +119,8 @@ INSERT INTO `data_absen` (`id_absen`, `id_user`, `id_bln`, `id_hri`, `id_tgl`, `
 (10, '27', 9, 4, 21, '15:17', 'Menunggu', '15:57', 'Menunggu', ''),
 (11, '28', 9, 4, 21, '16:52', 'Menunggu', '16:53', 'Menunggu', ''),
 (12, '29', 9, 4, 21, '16:56', 'Menunggu', '16:56', 'Menunggu', ''),
-(13, '12', 9, 5, 22, '10:01', 'Menunggu', '11:15', 'Menunggu', '');
+(13, '12', 9, 5, 22, '10:01', 'Menunggu', '11:15', 'Menunggu', ''),
+(14, '12', 9, 6, 23, '23:33', 'Menunggu', '23:00', '', '');
 
 -- --------------------------------------------------------
 
@@ -247,7 +248,7 @@ ALTER TABLE `bulan`
 -- AUTO_INCREMENT untuk tabel `data_absen`
 --
 ALTER TABLE `data_absen`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `hari`

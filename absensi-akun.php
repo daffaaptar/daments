@@ -1,10 +1,11 @@
 <?php
+
 session_start();
 
 // membatasi halaman sebelum login
 if (!isset($_SESSION["login"])) {
     echo "<script>
-            alert('Login dulu dong');
+            alert('login dulu dong');
             document.location.href = 'login.php';
           </script>";
     exit;
@@ -19,7 +20,8 @@ $data_akun = select("SELECT * FROM akun");
 $data_user = select("SELECT * FROM data_absen");
 
 // tampil data berdasarkan user login
-
+$id_akun = $_SESSION['id_akun'];
+$data_bylogin = select("SELECT * FROM akun WHERE id_akun = $id_akun");
 
 // jika tombol tambah di tekan jalankan script berikut
 if (isset($_POST['tambah'])) {
@@ -100,7 +102,7 @@ if (isset($_POST['ubah'])) {
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0"><i class="fas fa-user-cog"></i> Data Akun</h1>
+                    <h1 class="m-1"><i class="fas fa-book"></i>Rekap Absensi</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                 </div><!-- /.col -->
@@ -110,38 +112,27 @@ if (isset($_POST['ubah'])) {
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content">
-        <div class="container-fluid">
-
-            <!-- Main content -->
-            <div class="card">
-                
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <?php if ($_SESSION['level'] == "super-admin") : ?>
-                        <button type="button" class="btn btn-primary btn-sm mb-1" data-toggle="modal" data-target="#modalTambah">
-                        <i class="fas fa-plus"></i> Tambah Akun</button>
-                    <?php endif; ?>
-
-        <table class="table table-bordered table-hover mt-3">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Jabatan</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <?php if ($_SESSION['level'] == 'super-admin') : ?>
-                    <th>Aksi</th>
-                    <?php endif; ?>
-                </tr>
-                </thead>
+<section class="content">
+  <div class="container-fluid">
+      <div class="card">
+          <div class="card-body">
+  <table class="table table-bordered table-hover mt-3">
+      <thead>
+          <tr>
+              <th>No</th>
+              <th>Nama</th>
+              <th>Jabatan</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Aksi</th>
+          </tr>
+      </thead>
             </div>
                     <tbody>
         <?php $no = 1; ?>
         <!-- tampil seluruh data -->
-        <?php foreach ($data_akun as $akun) : ?>
-        <?php if ($akun['level'] == 'karyawan') : ?>
+<?php foreach ($data_akun as $akun) : ?>
+    <?php if ($akun['level'] == 'karyawan') : ?>
     <tr>
         <td><?= $no++; ?></td>
         <td><?= $akun['nama']; ?></td>
@@ -150,16 +141,15 @@ if (isset($_POST['ubah'])) {
         <td><?= $akun['email']; ?></td>
         <td class="text-center">
             
-            <?php if ($_SESSION['level'] == 'super-admin') : ?>
-            <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#modalUbah<?= $akun['id_akun']; ?>">
-            <i class="fas fa-edit" data-bs-toggle="tooltip" title="Ubah akun"></i> </button>
-            <button type="button" class="btn btn-danger mb-1" data-toggle="modal" data-target="#modalHapus<?= $akun['id_akun']; ?>">
-            <i class="fas fa-trash-alt" data-bs-toggle="tooltip" title="Hapus Akun"></i> </button>
-            <?php endif; ?>
+        <a href="detail-absen.php?id_user=<?= $akun['id_akun']; ?>" class="btn btn-success mb-1" data-bs-toggle="tooltip" title="Rekap Absensi">
+        <i class="fas fa-book"></i></a>
+        <a href="detail-absen.php?id_user=<?= $akun['id_akun']; ?>" class="btn btn-warning mb-1" data-bs-toggle="tooltip" title="Overtime">
+        <i class="fas fa-clock"></i></a>
+
         </td>
-    </tr>
+                </tr>
     <?php endif; ?>
-    <?php endforeach; ?>
+<?php endforeach; ?>
     </tbody>
 </table>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
