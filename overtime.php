@@ -93,4 +93,4 @@ include 'layout/header.php';
       </div>
    </body>
 </html>
-<?php include 'layout/footer.php'; ?>
+<?php include 'layout/footer2.php'; ?>

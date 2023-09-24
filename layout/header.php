@@ -92,6 +92,17 @@ include 'config/app.php';
                 </a>
             </li>
             <?php endif; ?>
+            
+            <?php if ($_SESSION['level'] == "karyawan" ) : ?>
+        <li class="nav-item">
+            <a href="overtime.php" class="nav-link">
+                    <i class="nav-icon fas fa-clock"></i>
+                        <p>
+                            Overtime
+                        </p>
+                </a>
+            </li>
+            <?php endif; ?>
 
             <?php if ($_SESSION['level'] == "karyawan") : ?>
         <li class="nav-item">

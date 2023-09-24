@@ -143,7 +143,7 @@ if (isset($_POST['ubah'])) {
             
         <a href="detail-absen.php?id_user=<?= $akun['id_akun']; ?>" class="btn btn-success mb-1" data-bs-toggle="tooltip" title="Rekap Absensi">
         <i class="fas fa-book"></i></a>
-        <a href="detail-absen.php?id_user=<?= $akun['id_akun']; ?>" class="btn btn-warning mb-1" data-bs-toggle="tooltip" title="Overtime">
+        <a href="lihat-lembur.php?id_user=<?= $akun['id_akun']; ?>" class="btn btn-warning mb-1" data-bs-toggle="tooltip" title="Overtime">
         <i class="fas fa-clock"></i></a>
 
         </td>
