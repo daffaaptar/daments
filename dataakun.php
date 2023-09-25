@@ -11,7 +11,7 @@ if (!isset($_SESSION["login"])) {
 }
 
 // membatasi halaman sesuai user login
-if ($_SESSION["level"] != "super-admin") {
+if ($_SESSION["level"] != "super-admin" and $_SESSION["level"] != "admin") {
     echo "<script>
             alert('Perhatian anda tidak punya hak akses');
             window.history.back(); 

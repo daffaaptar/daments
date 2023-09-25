@@ -1,10 +1,9 @@
 <?php
-
 session_start();
 
 include 'config/app.php';
 
-// check apakah tmbol login ditekan
+// check apakah tombol login ditekan
 if (isset($_POST['login'])) {
     // ambil input username dan password
     $username = mysqli_real_escape_string($db, $_POST['username']);
@@ -27,16 +26,23 @@ if (isset($_POST['login'])) {
             $_SESSION['email']      = $hasil['email'];
             $_SESSION['level']      = $hasil['level'];
 
-            // jika login benar arahkan ke file index.php
-            header("Location: home.php");
-            exit;
+            // cek level pengguna
+            if ($hasil['level'] == 'karyawan') {
+                // jika level karyawan, arahkan ke halaman absen.php
+                header("Location: absen.php");
+                exit;
+            } elseif ($hasil['level'] == 'super-admin' || $hasil['level'] == 'admin') {
+                // jika level Super-admin atau Admin, arahkan ke halaman index.php
+                header("Location: dashboard.php");
+                exit;
+            }
         }
     }
     // jika tidak ada usernya/login salah
     $error = true;
 }
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

@@ -113,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $('#summernote').summernote();
     });
   </script>
-        <button type="submit" nameclass="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
        </div>
         </div>
