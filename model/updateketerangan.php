@@ -1,25 +1,31 @@
 <?php 
 
-// include "config\database.php"
+function update_data_absen($id_absen, $tanggal, $jam_msk, $jam_klr, $keterangan) {
+  // Implementasikan koneksi ke database Anda di sini
+  $servername = "localhost";
+  $username = "your_username";
+  $password = "your_password";
+  $database = "your_database";
 
-// $id = $_GET['id_user'];
+  $conn = new mysqli($servername, $username, $password, $database);
 
-// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//   // Mendapatkan data yang dikirimkan dari formulir
-//   $keterangan = $_POST['keterangan'];
+  // Check the connection
+  if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+  }
 
-//   // Query SQL untuk melakukan update hanya pada bagian keterangan
-//   $update_query = "UPDATE tabel_nama SET keterangan = '$keterangan' WHERE id = $id";
+  // Gunakan prepared statement untuk menghindari SQL injection
+  $stmt = $conn->prepare("UPDATE data_absen SET tanggal = ?, jam_msk = ?, jam_klr = ?, keterangan = ? WHERE id_absen = ?");
+  $stmt->bind_param("ssssi", $tanggal, $jam_msk, $jam_klr, $keterangan, $id_absen);
+  $stmt->execute();
 
-//   if (mysqli_query($koneksi, $update_query)) {
-//       echo "Keterangan berhasil diupdate!";
-//   } else {
-//       echo "Terjadi kesalahan saat mengupdate keterangan: " . mysqli_error($koneksi);
-//   }
-// }
+  // Periksa apakah pembaruan berhasil
+  $affected_rows = $stmt->affected_rows;
+  
+  // Tutup statement dan koneksi database
+  $stmt->close();
+  $conn->close();
 
-// // Mendapatkan data yang sudah ada dari database
-// $query = "SELECT * FROM tabel_nama WHERE id = $id";
-// $result = mysqli_query($koneksi, $query);
-// $data = mysqli_fetch_assoc($result);
+  return $affected_rows;
+}
 ?>

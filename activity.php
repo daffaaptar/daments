@@ -23,6 +23,18 @@ $title = 'Detail Absensi';
 
  
 include 'layout/header.php';
+if (isset($_POST['tambah'])) {
+    // Validasi email jika sama
+    $email = $_POST['email'];
+    $existing_email = select("SELECT email FROM akun WHERE email = '$email'");
+    if ($existing_email) {
+        echo "<script>
+                alert('Email sudah terdaftar. Gunakan email lain.');
+                document.location.href = 'absen.php';
+              </script>";
+        exit;
+    }
+}
 ?> 
  
 <!-- Content Wrapper. Contains page content --> 
@@ -46,7 +58,7 @@ include 'layout/header.php';
   
     <form action="proses_form.php" method="post">
         <label for="tipe">Tipe Aktivitas:</label>
-        <select name="tipe" id="tipe" class="form-control">
+        <select name="tipe" name="tipe" id="tipe" class="form-control">
             <option value="">-- Pilih Activity --</option>
             <option value="development">Development</option>
             <option value="discuss">Discuss</option>
@@ -74,7 +86,7 @@ include 'layout/header.php';
         <textarea name="detail" id="detail" rows="4" class="form-control" required></textarea>
         <br>
         
-        <input type="submit" value="Simpan" class="btn btn-primary">
+        <input type="submit" name="tambah"value="Simpan" class="btn btn-primary">
     </form>
     </div> 
 </div> 

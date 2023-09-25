@@ -31,36 +31,52 @@ $id_akun = $_SESSION['id_akun'];
 
 $data_bylogin = select("SELECT * FROM akun WHERE id_akun = $id_akun");
 
+if (isset($_POST['ubah_keterangan'])) {
+    // Ambil id_user yang akan diubah keterangannya
+    $id_absen = $_POST['id_absen'];
 
-// jika tombol tambah di tekan jalankan script berikut
-if (isset($_POST['tambah'])) {
-    if (create_akun($_POST) > 0) {
-        echo "<script>
-                alert('Data Akun Berhasil Ditambahkan');
-                document.location.href = 'akun.php';
-              </script>";
+    // Ambil keterangan yang baru dimasukkan oleh pengguna
+    $new_keterangan = $_POST['keterangan'];
+
+    // Lanjutkan dengan perubahan keterangan jika data yang diperlukan tersedia
+    if (isset($id_absen) && isset($new_keterangan)) {
+        // Perbarui keterangan dalam tabel data_absen
+        $query_update_keterangan = "UPDATE data_absen SET keterangan = ? WHERE id_absen = ?";
+        $stmt = $db->prepare($query_update_keterangan);
+        
+        if ($stmt === false) {
+            die('Prepare failed: ' . htmlspecialchars($db->error));
+        }
+        
+        // Bind parameters
+        $stmt->bind_param('si', $new_keterangan, $id_absen);
+        
+        // Eksekusi pernyataan
+        if ($stmt->execute()) {
+            echo "<script>
+                    alert('Keterangan Berhasil Diubah');
+                    document.location.href = 'presensi.php';
+                  </script>";
+        } else {
+            echo "<script>
+                    alert('Keterangan Gagal Diubah');
+                    document.location.href = 'presensi.php';
+                  </script>";
+        }
+
+        // Tutup pernyataan
+        $stmt->close();
     } else {
         echo "<script>
-                alert('Data Akun Gagal Ditambahkan');
-                document.location.href = 'akun.php';
+                alert('Data yang diperlukan tidak lengkap.');
+                document.location.href = 'presensi.php';
               </script>";
     }
 }
 
-// jika tombol ubah di tekan jalankan script berikut
-if (isset($_POST['ubah'])) {
-    if (update_akun($_POST) > 0) {
-        echo "<script>
-                alert('Data Akun Berhasil Diubah');
-                document.location.href = 'akun.php';
-              </script>";
-    } else {
-        echo "<script>
-                alert('Data Akun Gagal Diubah');
-                document.location.href = 'akun.php';
-              </script>";
-    }
-}
+
+?>
+
 
 ?>
 
@@ -166,7 +182,8 @@ if ($cek!==0) {
             
             <th rowspan='2' width='10%' style='text-align: center; vertical-align: middle;'>Durasi</th>
             
-            <th rowspan='2' width='50%' style='text-align: center; vertical-align: middle;'>Keterangan/Progres</th>
+            <th rowspan='3' width='50%' style='text-align: center; vertical-align: middle;'>Keterangan/Progres</th>
+            <th></th>
         </tr>
             </thead>
             <tbody>";
@@ -203,8 +220,9 @@ $selisih_waktu = "<strong>Format waktu tidak valid</strong>";
                 <td>$time_in</td>
                 <td>$time_out</td>
                 <td>" . ($selisih_waktu instanceof DateInterval ? $selisih_waktu->format('%H jam %i menit') : $selisih_waktu) . "</td>
-                <td style='text-align:right;'> $keterangan <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#keluar'  style='  font-size:18px; border-radius:5px;'>
-                Masuk Keterangan
+                <td>$keterangan</td>
+                <td style='text-align:right;'> <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#keluar' style='font-size:18px; border-radius:5px;'>
+                <i class='nav-icon fas fa-pen'></i>
                 </button> </td>
             </tr>";
 }
@@ -235,15 +253,16 @@ echo "</table>";
         </button>
       </div>
       <div class='modal-body'>
-      <form action='' method='post'>
-      <label for='keterangan'>Masukan keterangan hari ini :</label>
-      <input type='text' id='keterangan' name='keterangan'  class='form-control' >
-      <input type='hidden' name='absen' value='1'>
-      </form>
-      <div class='modal-footer'>
-        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Batal</button>
-        <button type="button"  name="ubah" class="btn btn-primary">Save changes</button></div>
-      </div>
+      <form method="POST">
+    <input type="hidden" name="id_absen" value="<?php echo $id_absen; ?>">
+    <div class="form-group">
+        <label for="keterangan">Keterangan:</label>
+        <input type="text" name="keterangan" id="keterangan" class="form-control" value="<?php echo $keterangan; ?>" required>
+    </div>
+    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Batal</button>
+    <button type="submit" name="ubah_keterangan" class="btn btn-primary">Ubah Keterangan</button>
+</form>
+      
     </div>
   </div>
 </div>
