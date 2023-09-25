@@ -3,3 +3,4 @@
 $db = mysqli_connect('localhost', 'root', '', 'amal');
 
 
+?>

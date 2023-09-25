@@ -10,6 +10,14 @@ if (!isset($_SESSION["login"])) {
           </script>";
     exit;
 }
+// membatasi halaman sesuai user login
+if ($_SESSION["level"] != "super-admin" and $_SESSION["level"] != "admin") {
+    echo "<script>
+            alert('Perhatian anda tidak punya hak akses');
+            window.history.back(); 
+          </script>";
+    exit;
+  }
 
 $title = 'Data Akun';
 

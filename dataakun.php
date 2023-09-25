@@ -212,7 +212,7 @@ if (isset($_POST['ubah'])) {
       </div>
       <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-          <button type="submit" name="tambah" class="btn btn-primary">Tambah</button>
+          <button type="submit" name="submit" class="btn btn-primary">Tambah</button>
       </div>
             </form>
         </div>
