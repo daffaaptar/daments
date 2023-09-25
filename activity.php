@@ -23,6 +23,31 @@ if ($_SESSION["level"] != "karyawan") {
 
  
 include 'layout/header.php';
+
+$id_akun = $_SESSION['id_akun'];
+$data_bylogin = select("SELECT * FROM akun WHERE id_akun = $id_akun");
+
+if (isset($_POST['submit'])) {
+    $tipe_activity = mysqli_real_escape_string($db, $_POST["tipe"]);
+    $project_name = mysqli_real_escape_string($db, $_POST["projectName"]);
+    $start_date = mysqli_real_escape_string($db, $_POST["startDate"]);
+    $end_date = mysqli_real_escape_string($db, $_POST["endDate"]);
+    $status_activity = mysqli_real_escape_string($db, $_POST["status"]);
+    $detail_activity = mysqli_real_escape_string($db, $_POST["detail"]);
+    
+    // Sesuaikan kolom yang akan diisi sesuai dengan struktur tabel "activity"
+    $sql = "INSERT INTO activity (tipe_activity, project_name, start_date, end_date,  status_activity, detail_activity) 
+            VALUES ('$tipe_activity', '$project_name', '$start_date', '$end_date', '$status_activity', '$detail_activity')";
+
+    if (mysqli_query($db, $sql)) {
+        echo "<script>window.alert('Success');
+              window.location='absen.php';</script>";
+    } else {
+        echo "<script>window.alert('Failed');
+              window.location='absen.php';</script>";
+    }
+} 
+
 ?> 
  
 <!-- Content Wrapper. Contains page content --> 
@@ -44,10 +69,10 @@ include 'layout/header.php';
        
   <div class="card-body"> 
   
-    <form action="proses_form.php" method="post">
-        <label for="tipe">Tipe Aktivitas:</label>
-        <select name="tipe" id="tipe" class="form-control">
-            <option value="">-- Pilih Activity --</option>
+    <form action="" method="post">
+        <label for="tipe">Type Activity:</label>
+        <select name="tipe" id="tipe" class="form-control" require>
+            <option value="">-- Select an activity --</option>
             <option value="development">Development</option>
             <option value="discuss">Discuss</option>
             <option value="review">Review</option>
@@ -59,13 +84,14 @@ include 'layout/header.php';
         <br>
         
         <label for="startDate">Start Date:</label>
-        <input type="date" name="startDate" id="startDate" class="form-control">
+        <input type="date" name="startDate" id="startDate" class="form-control" >
         <br>
         
         <label for="endDate">End Date:</label>
         <input type="date" name="endDate" id="endDate" class="form-control" >
         <br>
-
+        
+        
 
         <label for="status">Status Activity:</label>
         <select name="status" id="status" class="form-control">
@@ -78,7 +104,7 @@ include 'layout/header.php';
         <textarea name="detail" id="detail" rows="4" class="form-control" required></textarea>
         <br>
         
-        <input type="submit" value="Simpan" class="btn btn-primary">
+        <input type="submit" value="submit" name="submit" class="btn btn-primary">
     </form>
     </div> 
 </div> 

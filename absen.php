@@ -100,10 +100,10 @@ if ($_SESSION["level"] != "karyawan") {
         $result = $db->query($sql);
 
         // Notifikasi Absen
-        if (isset($_GET['ab'])) {
-            if ($_GET['ab'] == 1) {
+        if (isset($_GET['absen'])) {
+            if ($_GET['absen'] == 1) {
                 echo "<div class='alert alert-warning'><strong>Terimakasih, Absen berhasil.</strong></div>";
-            } elseif ($_GET['ab'] == 2) {
+            } elseif ($_GET['absen'] == 2) {
                 echo "<div class='alert alert-danger'><strong>Maaf, Absen Gagal. Silahkan Coba Kembali!</strong></div>";
             }
         }
