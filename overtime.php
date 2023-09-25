@@ -13,6 +13,35 @@ if (!isset($_SESSION["login"])) {
 $title = 'Daftar Akun';
 
 include 'layout/header.php';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve data from the form
+    $tanggal = $_POST["tanggal"];
+    $datang = $_POST["datang"];
+    $pulang = $_POST["pulang"];
+    $durasi = $_POST["durasi"];
+    $jamLembur = $_POST["jam-lembur"];
+    $agenda = $_POST["agenda"];
+    $notaDinas = $_POST["nota-dinas"];
+
+    // Prepare and execute an SQL INSERT statement
+    $sql = "INSERT INTO data_lembur (tanggal, datang_pukul, pulang_pukul, durasi, jam_lembur, agenda, nota_dinas)
+            VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssssss", $tanggal, $datang, $pulang, $durasi, $jamLembur, $agenda, $notaDinas);
+
+    if ($stmt->execute()) {
+        // Data inserted successfully
+        echo "Data has been added to the database.";
+    } else {
+        // Error occurred during insertion
+        echo "Error: " . $stmt->error;
+    }
+
+    // Close the database connection
+    $stmt->close();
+    $conn->close();
+}
+
 
 ?>
 
@@ -84,7 +113,7 @@ include 'layout/header.php';
     $('#summernote').summernote();
     });
   </script>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" nameclass="btn btn-primary">Submit</button>
     </form>
        </div>
         </div>

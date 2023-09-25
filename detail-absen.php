@@ -57,6 +57,13 @@ if (empty($query_absen)) {
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+
+            </div>
+        </div>
+    </div>
     <!-- Content Header (Page header) -->
     <section class="content">
         <div class="container-fluid">
