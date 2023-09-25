@@ -84,7 +84,7 @@ include 'layout/header.php';
     $('#summernote').summernote();
     });
   </script>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" style="margin-top:18px; font-size:18px;">Submit</button>
     </form>
        </div>
         </div>
@@ -93,4 +93,4 @@ include 'layout/header.php';
       </div>
    </body>
 </html>
-<?php include 'layout/footer.php'; ?>
+<?php include 'layout/footer2.php'; ?>

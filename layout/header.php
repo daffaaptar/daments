@@ -71,6 +71,15 @@ include 'config/app.php';
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-header">Daftar Menu</li>
 
+        <li class="nav-item">
+                <a href="dashboard.php" class="nav-link">
+                    <i class="nav-icon fas fa-home"></i>
+                    <p>
+                        Dashboard
+                    </p>
+                </a>
+            </li>
+
         <?php if ($_SESSION['level'] == "karyawan") : ?>
             <li class="nav-item">
                 <a href="presensi.php" class="nav-link">
@@ -85,7 +94,7 @@ include 'config/app.php';
             <?php if ($_SESSION['level'] == "karyawan") : ?>
         <li class="nav-item">
             <a href="absen.php" class="nav-link">
-                    <i class="nav-icon fas fa-user-cog"></i>
+                    <i class="nav-icon fas fa-pen"></i>
                         <p>
                             Absen
                         </p>
