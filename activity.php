@@ -58,7 +58,7 @@ if (isset($_POST['submit'])) {
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                <h1 class="m-0"><i class="nav-icon fas fa-user-cog"></i> Activity</h1>
+                <h1 class="m-0"><i class="nav-icon fas fa-user"></i> Aktifitas</h1>
                 </div>
 </div> 
 </div> 

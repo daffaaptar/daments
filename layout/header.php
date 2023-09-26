@@ -85,7 +85,7 @@ include 'config/app.php';
         <?php if ($_SESSION['level'] == "karyawan") : ?>
             <li class="nav-item">
                 <a href="presensi.php" class="nav-link">
-                    <i class="nav-icon fas fa-list"></i>
+                    <i class="nav-icon fas fa-book"></i>
                     <p>
                         Rekap Absen
                     </p>
@@ -109,7 +109,7 @@ include 'config/app.php';
             <a href="overtime.php" class="nav-link">
                     <i class="nav-icon fas fa-clock"></i>
                         <p>
-                            Overtime
+                            Lembur
                         </p>
                 </a>
             </li>
@@ -118,9 +118,9 @@ include 'config/app.php';
             <?php if ($_SESSION['level'] == "karyawan") : ?>
         <li class="nav-item">
             <a href="activity.php" class="nav-link">
-                    <i class="nav-icon fas fa-user-cog"></i>
+                    <i class="nav-icon fas fa-user"></i>
                         <p>
-                            Activity
+                            Aktifitas
                         </p>
                 </a>
             </li>
