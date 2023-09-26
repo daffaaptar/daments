@@ -91,8 +91,8 @@ elseif (isset($_GET['absen'])) {
     );
    if ($statement->execute()) {
     $db->close();
-    header("location:../activity.php");
-
+    header("location:../absen.php");
+    
 
    } else {
     header("location:../absen&ab=2");

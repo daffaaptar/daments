@@ -8,4 +8,3 @@ CREATE TABLE activity (
     status_activity VARCHAR(255) NOT NULL,
     detail_activity TEXT NOT NULL
 );
-a
