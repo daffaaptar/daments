@@ -73,7 +73,7 @@ if (empty($query_absen)) {
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title" style="margin-top: 5px;">Detail Absensi - <?php echo $nama_akun; ?></h3>
-                    <a href="exportxl.php?id_user=<?php echo $id_user; ?>" class="btn btn-success float-right">Export to Excel</a>
+                    <a href="exportxl.php?id_user=<?php echo $id_user; ?>" class="btn btn-danger float-right">Export to Excel</a>
                 </div>
                 <div class="card-body">
                     <?php if (empty($query_absen)) : ?>
