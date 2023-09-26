@@ -10,7 +10,7 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 
-$title = 'Detail Absensi';
+$title = 'Detail Aktivitas';
 
 // Memeriksa level pengguna
 if ($_SESSION["level"] != "super-admin") {
@@ -22,6 +22,12 @@ if ($_SESSION["level"] != "super-admin") {
 }
 
 include 'layout/header.php';
+
+// Fungsi untuk mengonversi tanggal dari format YYYY-MM-DD ke tanggal bulan tahun
+function convertDateFormat($date) {
+    $tanggal = date_create($date); // Membuat objek tanggal dari string
+    return date_format($tanggal, "d F Y"); // Mengonversi ke format tanggal bulan tahun
+}
 
 // Ambil id_akun dari URL
 if (isset($_GET['id_user'])) {
@@ -38,51 +44,64 @@ if (isset($_GET['id_user'])) {
         // Query untuk mendapatkan detail aktivitas
         $query = "SELECT * FROM activity WHERE id_akun = $id_user";
         $result = mysqli_query($db, $query);
+?>
 
-        if ($result) {
-            $aktivitas = mysqli_fetch_assoc($result);
-        ?>
-            <!-- Content Wrapper. Contains page content --> 
-            <div class="content-wrapper">
-                <div class="content-header">
-                    <div class="container-fluid">
-                        <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <h1 class="m-0"><i class="nav-icon fas fa-user"></i> Detail Aktivitas</h1>
-                            </div>
-                        </div>
-                    </div>
+<!-- Content Wrapper. Contains page content --> 
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0"><i class="nav-icon fas fa-user"></i> Detail Aktivitas</h1>
                 </div>
-
-                <!-- Content Header (Page header) --> 
-                <section class="content"> 
-                    <div class="container-fluid"> 
-                        <div class="card"> 
-                            <div class="card-body"> 
-                            <?php if (empty($aktivitas)) : ?>
-                                <p>Tidak ada data aktivitas yang ditemukan untuk akun ini.</p>
-                            <?php else : ?>
-                                <h2>Aktivitas - <?php echo $nama_akun; ?></h2>
-                                <p>Tipe Aktivitas: <?php echo $aktivitas['tipe_activity']; ?></p>
-                                <p>Nama Proyek: <?php echo $aktivitas['project_name']; ?></p>
-                                <p>Tanggal Mulai: <?php echo $aktivitas['start_date']; ?></p>
-                                <p>Tanggal Selesai: <?php echo $aktivitas['end_date']; ?></p>
-                                <p>Status Aktivitas: <?php echo $aktivitas['status_activity']; ?></p>
-                                <p>Detail Aktivitas: <?php echo $aktivitas['detail_activity']; ?></p>
-                            <?php endif; ?>
-                            </div>
-                        </div>
-                    </div>
-                </section>
             </div>
+        </div>
+    </div>
+
+    <!-- Content Header (Page header) --> 
+    <section class="content"> 
+        <div class="container-fluid"> 
+            <div class="card"> 
+                <div class="card-body"> 
+                <?php if (mysqli_num_rows($result) > 0) : ?>
+                    <h2>Aktivitas - <?php echo $nama_akun; ?></h2>
+                    <table class="table table-bordered table-hover mt-3">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Tipe Aktivitas & Nama Project:</th>
+                                <th>Tanggal Mulai</th>
+                                <th>Tanggal Selesai</th>
+                                <th>Status Aktivitas</th>
+                                <th>Detail Aktivitas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $no = 1;
+                            while ($data = mysqli_fetch_assoc($result)) :
+                            ?>
+                                <tr>
+                                    <td><?php echo $no++; ?></td>
+                                    <td><?php echo $data['tipe_activity']; ?></td>
+                                    <td><?php echo convertDateFormat($data['start_date']); ?></td>
+                                    <td><?php echo convertDateFormat($data['end_date']); ?></td>
+                                    <td><?php echo $data['status_activity']; ?></td>
+                                    <td><?php echo $data['detail_activity']; ?></td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                <?php else : ?>
+                    <p>Tidak ada data aktivitas yang ditemukan untuk akun ini.</p>
+                <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
 <?php
-        } else {
-            echo "<script>
-                    alert('Gagal mengambil data aktivitas');
-                    window.location='absensi-akun.php';
-                  </script>";
-            exit;
-        }
     } else {
         echo "<script>
                 alert('Gagal mengambil data nama akun');

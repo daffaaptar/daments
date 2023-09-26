@@ -98,8 +98,8 @@ if (isset($_POST['submit'])) {
         <label for="status">Status Activity:</label>
         <select name="status" id="status" class="form-control">
             <option value="">-- Select an status --</option>
-            <option value="complete">Completed</option>
-            <option value="discuss">Process</option>
+            <option value="Complete">Completed</option>
+            <option value="Proses">Process</option>
         </select>
         <br>
         <label for="detail">Detail Aktivitas:</label>
