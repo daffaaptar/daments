@@ -50,7 +50,7 @@ $query_absen = select("
 
 // Check if there are any rows returned
 if (empty($query_absen)) {
-    echo "<p>Tidak ada data absensi yang ditemukan untuk akun ini.</p>";
+  
 } else {
     // Query basis data untuk mengambil nama akun
     $query_nama = select("SELECT nama FROM akun WHERE id_akun = $id_user ");
@@ -63,7 +63,6 @@ if (empty($query_absen)) {
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-
             </div>
         </div>
     </div>
@@ -73,7 +72,7 @@ if (empty($query_absen)) {
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title" style="margin-top: 5px;">Detail Absensi - <?php echo $nama_akun; ?></h3>
-                    <a href="exportxl.php?id_user=<?php echo $id_user; ?>" class="btn btn-success float-right">Export to Excel</a>
+                    <a href="exportxl.php?id_user=<?php echo $id_user; ?>" class="btn btn-danger float-right">Export to Excel</a>
                 </div>
                 <div class="card-body">
                     <?php if (empty($query_absen)) : ?>

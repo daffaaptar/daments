@@ -88,17 +88,13 @@ if (isset($_POST['submit'])) {
         <label for="tipe">Type Activity & Project Name:</label>
         <textarea id="summernote" name="tipe" class="form-control" rows="4" required></textarea>
         <br>
-
+        
         <label for="startDate">Start Date:</label>
         <input type="date" name="startDate" id="startDate" class="form-control" >
         <br>
-        
         <label for="endDate">End Date:</label>
         <input type="date" name="endDate" id="endDate" class="form-control" >
         <br>
-        
-        
-
         <label for="status">Status Activity:</label>
         <select name="status" id="status" class="form-control">
             <option value="">-- Select an status --</option>

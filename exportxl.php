@@ -67,12 +67,22 @@ $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 
 // Menambahkan header ke file Excel
+$sheet->setCellValue('A1', 'Nama :');
+$sheet->setCellValue('B1', 'Jabatan :');    
 $sheet->setCellValue('A1', 'No');
 $sheet->setCellValue('B1', 'Tanggal');
 $sheet->setCellValue('C1', 'Jam Masuk');
 $sheet->setCellValue('D1', 'Jam Keluar');
 $sheet->setCellValue('E1', 'Durasi');
 $sheet->setCellValue('F1', 'Keterangan');
+
+// Mengisi data nama dan jabatan (role) di atas tabel
+$query_nama_jabatan = select("SELECT nama, level FROM akun WHERE id_akun = $id_user ");
+$nama = $query_nama_jabatan[0]['nama'];
+$level = $query_nama_jabatan[0]['level'];
+$sheet->setCellValue('A2', $nama);
+$sheet->setCellValue('B2', $level);
+
 
 // Mengisi data absensi ke dalam file Excel
 $no = 1;
