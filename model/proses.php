@@ -91,7 +91,7 @@ elseif (isset($_GET['absen'])) {
     );
    if ($statement->execute()) {
     $db->close();
-    header("location:../overtime.php");
+    header("location:../presensi.php");
     
 
    } else {

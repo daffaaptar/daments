@@ -68,12 +68,13 @@ if (isset($_GET['id_user'])) {
                     <table class="table table-bordered table-hover mt-3">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Tipe Aktivitas & Nama Project:</th>
-                                <th>Tanggal Mulai</th>
-                                <th>Tanggal Selesai</th>
-                                <th>Status Aktivitas</th>
-                                <th>Detail Aktivitas</th>
+                                <th style="text-align: center; vertical-align: middle;">No</th>
+                                <th style="text-align: center; vertical-align: middle;">Tanggal</th>
+                                <th style="text-align: center; vertical-align: middle;">Tipe Aktivitas & Nama Project</th>
+                                <th style="text-align: center; vertical-align: middle;">Tanggal Mulai</th>
+                                <th style="text-align: center; vertical-align: middle;"style="text-align: center; vertical-align: middle;">Tanggal Selesai</th>
+                                <th style="text-align: center; vertical-align: middle;">Status Aktivitas</th>
+                                <th style="text-align: center; vertical-align: middle;">Detail Aktivitas</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -82,12 +83,13 @@ if (isset($_GET['id_user'])) {
                             while ($data = mysqli_fetch_assoc($result)) :
                             ?>
                                 <tr>
-                                    <td><?php echo $no++; ?></td>
-                                    <td><?php echo $data['tipe_activity']; ?></td>
-                                    <td><?php echo convertDateFormat($data['start_date']); ?></td>
-                                    <td><?php echo convertDateFormat($data['end_date']); ?></td>
-                                    <td><?php echo $data['status_activity']; ?></td>
-                                    <td><?php echo $data['detail_activity']; ?></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo $no++; ?></td>
+                                    <td style="vertical-align: middle;"><?php echo $data['tanggal']; ?></td>
+                                    <td style="vertical-align: middle;"><?php echo $data['tipe_activity']; ?></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo convertDateFormat($data['start_date']); ?></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo convertDateFormat($data['end_date']); ?></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo $data['status_activity']; ?></td>
+                                    <td style="text-align: center; vertical-align: middle;"><?php echo $data['detail_activity']; ?></td>
                                 </tr>
                             <?php endwhile; ?>
                         </tbody>
