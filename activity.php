@@ -5,7 +5,7 @@ session_start();
 if (!isset($_SESSION["login"])) { 
     echo "<script> 
             alert('Anda perlu login untuk memasuki halaman'); 
-            document.location.href = 'login.php'; 
+            document.location.href = 'index.php'; 
         </script>"; 
     exit; 
 } 
@@ -60,7 +60,7 @@ if (isset($_POST['submit'])) {
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                <h1 class="m-0"><i class="nav-icon fas fa-user-cog"></i> Activity</h1>
+                <h1 class="m-0"><i class="nav-icon fas fa-user"></i> Aktifitas</h1>
                 </div>
 </div> 
 </div> 
