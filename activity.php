@@ -54,6 +54,19 @@ if (isset($_POST['submit'])) {
 
 ?> 
  
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+ <meta charset="UTF-8">
+  <title>Summernote</title>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+ </head>
+ <body>
+    
+
 <!-- Content Wrapper. Contains page content --> 
 <div class="content-wrapper">
 <div class="content-header">
@@ -74,18 +87,10 @@ if (isset($_POST['submit'])) {
   <div class="card-body"> 
   
     <form action="" method="post">
-        <label for="tipe">Type Activity:</label>
-        <select name="tipe" id="tipe" class="form-control" require>
-            <option value="">-- Select an activity --</option>
-            <option value="development">Development</option>
-            <option value="discuss">Discuss</option>
-            <option value="review">Review</option>
-        </select>
+        <label for="tipe">Type Activity & Project Name:</label>
+        <textarea id="summernote" name="tipe" class="form-control" rows="4" required></textarea>
         <br>
         
-        <label for="projectName">Project Name:</label>
-        <input type="text" name="projectName" id="projectName" class="form-control" required>
-        <br>
         <label for="startDate">Start Date:</label>
         <input type="date" name="startDate" id="startDate" class="form-control" >
         <br>
@@ -110,5 +115,12 @@ if (isset($_POST['submit'])) {
 </div> 
 </section>
 </div> 
+<script>
+    $(document).ready(function() {
+    $('#summernote').summernote();
+    });
+</script>
+</body>
+ </html>
  
-<?php include 'layout/footer.php'; ?>
+<?php include 'layout/footer2.php'; ?>

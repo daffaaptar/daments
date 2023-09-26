@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Over Time</title>
+    <style>
+      /* Gaya untuk div yang mengelilingi tabel */
+      .table-container {
+            max-height: 200px; /* Atur tinggi maksimum untuk pemotongan */
+        }
+
+        /* Gaya untuk tabel */
+        table {
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body>
+    <table class="table table-bordered">    
+        <tr>
+            <th rowspan="2" style="text-align: center; vertical-align: middle;">NO</th>
+            <th rowspan="2" style="text-align: center; vertical-align: middle;">Tanggal</th>
+            <th class="text-center" style="width: 10%;">Datang</th>
+            <th class="text-center" width="10%">Pulang</th>
+            <th rowspan="2" width="10%" style="text-align: center; vertical-align: middle;">Durasi</th>
+            <th colspan="2" class="text-center" style="width: 10%;">Jumlah</th>
+            <th rowspan="2" width="20%" style="text-align: center; vertical-align: middle;">Daftar Pekerjaan / Agenda Tasks/Agenda List</th>
+            <th rowspan="2" width="20%" style="text-align: center; vertical-align: middle;">Nota Dinas / Undangan Document Meeting Invitation</th>
+          </tr>
+          <tr>
+            <th class="text-center">Pukul</th>
+            <th class="text-center">Pukul</th>
+            <th class="text-center" width="8%">Jam</th>
+            <th class="text-center" width="8%">Menit</th>
+          </tr>
+          <tr>
+            <td style="text-align: center; vertical-align: middle;">1</td>
+            <td width="10%" style="text-align: center; vertical-align: middle;"></td>
+            <td width="10%" style="text-align: center; vertical-align: middle;"></td>
+            <td width="10%" style="text-align: center; vertical-align: middle;"></td>
+            <td width="10%" style="text-align: center; vertical-align: middle;">0:00</td>
+            <td width="10%" style="text-align: center; vertical-align: middle;">0</td>
+            <td width="10%" style="text-align: center; vertical-align: middle;">0</td>
+            <td width="10%" style="text-align: center; vertical-align: middle;"></td>
+            <td ></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+    </table>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <div class="table-container">
+    <table class="table table-bordered">
+      <tr>
+        <th width="250px" >Employee Signature</th>
+        <th width="100px" >:</th>
+        <th width="150px" ></th>
+        <td width="250px" >Date</td>
+        <td >:</td>
+      </tr>
+      <tr>
+        <th >Aproval Signature</th>
+        <th >:</th>
+        <th width="100px" ></th>
+        <td >Date</td>
+        <td width="100px">:</td>
+      </tr>
+    </table>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  </body>
+</html>

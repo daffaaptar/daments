@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-// membatasi halaman sebelum login
+// Membatasi halaman sebelum login
 if (!isset($_SESSION["login"])) {
     echo "<script>
             alert('Anda perlu login untuk memasuki halaman');
-            document.location.href = index.php';
+            document.location.href = 'index.php';
           </script>";
     exit;
 }
@@ -13,40 +13,35 @@ if (!isset($_SESSION["login"])) {
 $title = 'Daftar Akun';
 
 include 'layout/header.php';
-//cek
-$data_akun = select("SELECT * FROM akun");
 
-//menambah
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Retrieve data from the form
+    // Mengambil data dari formulir
     $tanggal = $_POST["tanggal"];
     $datang = $_POST["datang"];
     $pulang = $_POST["pulang"];
-    $durasi = $_POST["durasi"];
-    $jamLembur = $_POST["jam-lembur"];
     $agenda = $_POST["agenda"];
-    $notaDinas = $_POST["nota-dinas"];
+    $notaDinas = $_POST["nota"];
 
-    // Prepare and execute an SQL INSERT statement
-    $sql = "INSERT INTO data_lembur (tanggal, datang_pukul, pulang_pukul, durasi, jam_lembur, agenda, nota_dinas)
-            VALUES (?, ?, ?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssss", $tanggal, $datang, $pulang, $durasi, $jamLembur, $agenda, $notaDinas);
+    // Persiapan dan eksekusi pernyataan SQL INSERT
+    $sql = "INSERT INTO overtime (tanggal, datang, pulang, agenda, nota) VALUES (?, ?, ?, ?, ?)";
+    $stmt = $db->prepare($sql);
+    $stmt->bind_param("sssss", $tanggal, $datang, $pulang, $agenda, $notaDinas);
 
     if ($stmt->execute()) {
-        // Data inserted successfully
-        echo "Data has been added to the database.";
+        // Data berhasil dimasukkan ke dalam database
+        echo "<script>
+                alert('Data telah berhasil dimasukkan ke dalam database.');
+                document.location.href = 'absen.php'; // Ganti dengan halaman yang sesuai
+              </script>";
     } else {
-        // Error occurred during insertion
+        // Terjadi kesalahan saat memasukkan data
         echo "Error: " . $stmt->error;
     }
 
-    // Close the database connection
+    // Tutup pernyataan
     $stmt->close();
-    $conn->close();
 }
-
-
 
 ?>
 
@@ -89,36 +84,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <form action="#" method="post">
     <div class="form-group">
         <label for="tanggal">Tanggal:</label>
-        <input type="date" id="tanggal" name="tanggal" class="form-control" required>
+        <input type="date" id="tanggal" name="tanggal" class="form-control">
     </div>
     <div class="form-group">
-       
         <label for="datang">Datang Pukul:</label>
         <input type="time" id="datang" name="datang" class="form-control" required>
     </div>
     <div class="form-group">
         <label for="pulang">Pulang Pukul:</label>
-        <input type="time" id="pulang" name="pulang" class="form-control" value="" required>
-    </div>
-   
- 
-    <div class="form-group">
-        <label for="jam-lembur">Jumlah Jam Lembur:</label>
-        <input type="number" id="jam-lembur" name="jam-lembur" class="form-control" required>
+        <input type="time" id="pulang" name="pulang" class="form-control" required>
     </div>
     <div class="form-group">
         <label for="agenda">Agenda saat Lembur:</label>
         <textarea id="agenda" name="agenda" class="form-control" rows="4" required></textarea>
     </div>
-    <label for="agenda">Nota Dinas:</label>
-    <div id="summernote"><p>Hello Summernote</p></div>
+    <div class="form-group">
+    <label for="nota">Nota Dinas:</label>
+    <textarea id="summernote" name="nota" class="form-control" rows="4" required></textarea>
+    </div>
     <script>
     $(document).ready(function() {
     $('#summernote').summernote();
     });
-  </script>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </script>
+    <br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
        </div>
         </div>
          </div>

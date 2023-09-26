@@ -70,57 +70,58 @@ if (empty($query_absen)) {
     <section class="content">
         <div class="container-fluid">
             <div class="card">
-    <div class="card-header">
-        <h3 class="card-title" style="margin-top: 5px;">Detail Absensi - <?php echo $nama_akun; ?></h3>
-        <a href="exportxl.php?id_user=<?php echo $id_user; ?>" class="btn btn-success float-right">Export to Excel</a>
-    </div>
-    <div class="card-body">
-        <?php if (empty($query_absen)) : ?>
-            <p>Tidak ada data absensi yang ditemukan untuk akun ini.</p>
-        <?php else : ?>
-            <table class="table table-bordered table-hover mt-3">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Tanggal</th>
-                        <th>Jam Masuk</th>
-                        <th>Jam Keluar</th>
-                        <th>Durasi</th>
-                        <th>Keterangan</th>
-                  </tr>
-            </thead>
-        <tbody>
-<?php foreach ($query_absen as $key => $absen) : ?>
-    <tr>
-        <td><?php echo $key + 1; ?></td>
-        <td><?php 
-        $date = "$absen[hari], $absen[tanggal] $absen[bulan] ".date("Y");
-        echo $date; ?></td>
-        
-        <td><?php echo $absen['jam_msk']; ?></td>
-        <td><?php echo $absen['jam_klr']; ?></td>
-        <td>
-            <?php
-            $jam_masuk = DateTime::createFromFormat('H:i', $absen['jam_msk']);
-            $jam_keluar = DateTime::createFromFormat('H:i', $absen['jam_klr']);
-        if ($jam_masuk && $jam_keluar) {
-            $selisih_waktu = $jam_masuk->diff($jam_keluar);
-            echo $selisih_waktu->format('%H jam %i menit');
-        } else {
-            echo "<strong>Format waktu tidak valid</strong>";
-}
-?>
-</td>
-        <td><?php echo $absen['keterangan']; ?></td>
-    </tr>
-           <?php endforeach; ?>
-        </tbody>
-     </table>
- <?php endif; ?>
-   </div>
-     </div>
-       </div>
-         </section>
-           </div>
+                <div class="card-header">
+                    <h3 class="card-title" style="margin-top: 5px;">Detail Absensi - <?php echo $nama_akun; ?></h3>
+                    <a href="exportxl.php?id_user=<?php echo $id_user; ?>" class="btn btn-danger float-right">Export to Excel</a>
+                </div>
+                <div class="card-body">
+                    <?php if (empty($query_absen)) : ?>
+                        <p>Tidak ada data absensi yang ditemukan untuk akun ini.</p>
+                    <?php else : ?>
+                        <table class="table table-bordered table-hover mt-3">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Tanggal</th>
+                                    <th>Jam Masuk</th>
+                                    <th>Jam Keluar</th>
+                                    <th>Durasi</th>
+                                    <th>Keterangan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($query_absen as $key => $absen) : ?>
+                                    <tr>
+                                        <td><?php echo $key + 1; ?></td>
+                                        <td><?php 
+                                       $date = "$absen[hari], $absen[tanggal] $absen[bulan] ".date("Y");
+                                        echo $date; ?></td>
+                                        
+                                        <td><?php echo $absen['jam_msk']; ?></td>
+                                        <td><?php echo $absen['jam_klr']; ?></td>
+                                        <td>
+                                            <?php
+                                            $jam_masuk = DateTime::createFromFormat('H:i', $absen['jam_msk']);
+                                            $jam_keluar = DateTime::createFromFormat('H:i', $absen['jam_klr']);
+
+                                            if ($jam_masuk && $jam_keluar) {
+                                                $selisih_waktu = $jam_masuk->diff($jam_keluar);
+                                                echo $selisih_waktu->format('%H jam %i menit');
+                                            } else {
+                                                echo "<strong>Format waktu tidak valid</strong>";
+                                            }
+                                            ?>
+                                        </td>
+                                        <td><?php echo $absen['keterangan']; ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 
 <?php include 'layout/footer.php'; ?>

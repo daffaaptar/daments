@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+// require_once 'path_to_phpexcel/PHPExcel.php';
+// require_once 'path_to_phpexcel/PHPExcel/IOFactory.php';
+
 // membatasi halaman sebelum login
 if (!isset($_SESSION["login"])) {
     echo "<script>
@@ -29,22 +32,20 @@ $id_user = $_GET['id_user'];
 // Query basis data untuk mengambil data absensi berdasarkan ID
 $query_absen = select("
     SELECT
-        data_lembur.id_lembur,
-        tanggal.tanggal AS tanggal,
-        datang.datang AS datang,
-        pulang.pulang AS pulang,
-        durasi.durasi AS durasi,
-        jam_lembur.jam_lembur AS lembur,
-        agenda.agenda AS agenda,
-        nota_dinas.nota_dinas AS nota,
-       
+        data_absen.id_absen,
+        tanggal.nama_tgl AS tanggal,
+        bulan.nama_bln AS bulan,
+        hari.nama_hri AS hari,
+        data_absen.jam_msk,
+        data_absen.jam_klr,
+        data_absen.keterangan
     FROM
-        data_lembur
+        data_absen
     JOIN tanggal ON data_absen.id_tgl = tanggal.id_tgl
     JOIN bulan ON data_absen.id_bln = bulan.id_bln
     JOIN hari ON data_absen.id_hri = hari.id_hri
     WHERE
-        data_lembur.id_lembur = $id_lembur;
+        data_absen.id_user = $id_user;
 ");
 
 // Check if there are any rows returned
@@ -59,12 +60,20 @@ if (empty($query_absen)) {
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+
+            </div>
+        </div>
+    </div>
     <!-- Content Header (Page header) -->
     <section class="content">
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Detail Absensi - <?php echo $nama_akun; ?></h3>
+                    <h3 class="card-title" style="margin-top: 5px;">Detail Absensi - <?php echo $nama_akun; ?></h3>
+                    <a href="exportxl.php?id_user=<?php echo $id_user; ?>" class="btn btn-success float-right">Export to Excel</a>
                 </div>
                 <div class="card-body">
                     <?php if (empty($query_absen)) : ?>
@@ -72,14 +81,16 @@ if (empty($query_absen)) {
                     <?php else : ?>
                         <table class="table table-bordered table-hover mt-3">
                             <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Tanggal</th>
-                                    <th>Jam Masuk</th>
-                                    <th>Jam Keluar</th>
-                                    <th>Durasi</th>
-                                    <th>Keterangan</th>
-                                </tr>
+                            <tr>
+                                <th rowspan="2" style="text-align: center; vertical-align: middle;">NO</th>
+                                <th rowspan="2" style="text-align: center; vertical-align: middle;">Tanggal</th>
+                                <th class="text-center" style="width: 10%; text-align: center; vertical-align: middle;">Datang</th>
+                                <th class="text-center" width="10%" style="text-align: center; vertical-align: middle;">Pulang</th>
+                                <th rowspan="2" width="10%" style="text-align: center; vertical-align: middle;">Durasi</th>
+                                <th colspan="2" class="text-center" style="width: 10%; text-align: center; vertical-align: middle;">Jumlah</th>
+                                <th rowspan="2" width="20%" style="text-align: center; vertical-align: middle;">Daftar Pekerjaan / Agenda Tasks/Agenda List</th>
+                                <th rowspan="2" width="20%" style="text-align: center; vertical-align: middle;">Nota Dinas / Undangan Document Meeting Invitation</th>
+                            </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($query_absen as $key => $absen) : ?>
