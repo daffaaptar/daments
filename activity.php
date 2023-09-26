@@ -29,7 +29,6 @@ $id_akun = $_SESSION['id_akun'];
 
 if (isset($_POST['submit'])) {
     $tipe_activity = mysqli_real_escape_string($db, $_POST["tipe"]);
-    $project_name = mysqli_real_escape_string($db, $_POST["projectName"]);
     $start_date = mysqli_real_escape_string($db, $_POST["startDate"]);
     $end_date = mysqli_real_escape_string($db, $_POST["endDate"]);
     $status_activity = mysqli_real_escape_string($db, $_POST["status"]);
@@ -38,8 +37,8 @@ if (isset($_POST['submit'])) {
     // Sesuaikan kolom yang akan diisi sesuai dengan struktur tabel "activity"
 
 
-    $sql =  "INSERT INTO activity (id_akun, tipe_activity, project_name, start_date, end_date,  status_activity, detail_activity) 
-    VALUES ('$id_akun', '$tipe_activity', '$project_name', '$start_date', '$end_date', '$status_activity', '$detail_activity')";
+    $sql =  "INSERT INTO activity (id_akun, tipe_activity, start_date, end_date,  status_activity, detail_activity) 
+    VALUES ('$id_akun', '$tipe_activity', '$start_date', '$end_date', '$status_activity', '$detail_activity')";
 
 
 
@@ -48,8 +47,7 @@ if (isset($_POST['submit'])) {
               window.location='absen.php';</script>";
     } else {
         echo "<script>window.alert('Failed');
-              window.location='absen.php';</script>";
-    }
+              window.location='absen.php';</script>";    }
 } 
 
 ?> 
