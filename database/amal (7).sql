@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 22 Sep 2023 pada 09.26
+-- Waktu pembuatan: 26 Sep 2023 pada 05.22
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `amal`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `activity`
+--
+
+CREATE TABLE `activity` (
+  `id_akun` int(11) NOT NULL,
+  `tipe_activity` varchar(255) NOT NULL,
+  `project_name` varchar(255) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `durasi` int(11) NOT NULL,
+  `status_activity` varchar(255) NOT NULL,
+  `detail_activity` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `activity`
+--
+
+INSERT INTO `activity` (`id_akun`, `tipe_activity`, `project_name`, `start_date`, `end_date`, `durasi`, `status_activity`, `detail_activity`) VALUES
+(12, 'discuss', 'dsadasdas', '1111-11-11', '2222-02-22', 0, 'discuss', 'sddddsadas');
 
 -- --------------------------------------------------------
 
@@ -119,7 +143,9 @@ INSERT INTO `data_absen` (`id_absen`, `id_user`, `id_bln`, `id_hri`, `id_tgl`, `
 (10, '27', 9, 4, 21, '15:17', 'Menunggu', '15:57', 'Menunggu', ''),
 (11, '28', 9, 4, 21, '16:52', 'Menunggu', '16:53', 'Menunggu', ''),
 (12, '29', 9, 4, 21, '16:56', 'Menunggu', '16:56', 'Menunggu', ''),
-(13, '12', 9, 5, 22, '10:01', 'Menunggu', '11:15', 'Menunggu', '');
+(13, '12', 9, 5, 22, '10:01', 'Menunggu', '11:15', 'Menunggu', ''),
+(14, '12', 9, 6, 23, '23:33', 'Menunggu', '23:00', '', 'anjas'),
+(15, '12', 9, 2, 26, '09:49', 'Menunggu', '10:13', 'Menunggu', '');
 
 -- --------------------------------------------------------
 
@@ -144,6 +170,21 @@ INSERT INTO `hari` (`id_hri`, `nama_hri`) VALUES
 (5, 'Jum\'at'),
 (6, 'Sabtu'),
 (7, 'Minggu');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `overtime`
+--
+
+CREATE TABLE `overtime` (
+  `id_lembur` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `datang` time NOT NULL,
+  `pulang` time NOT NULL,
+  `agenda` varchar(255) DEFAULT NULL,
+  `nota` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -222,6 +263,12 @@ ALTER TABLE `hari`
   ADD PRIMARY KEY (`id_hri`);
 
 --
+-- Indeks untuk tabel `overtime`
+--
+ALTER TABLE `overtime`
+  ADD PRIMARY KEY (`id_lembur`);
+
+--
 -- Indeks untuk tabel `tanggal`
 --
 ALTER TABLE `tanggal`
@@ -247,13 +294,19 @@ ALTER TABLE `bulan`
 -- AUTO_INCREMENT untuk tabel `data_absen`
 --
 ALTER TABLE `data_absen`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `hari`
 --
 ALTER TABLE `hari`
   MODIFY `id_hri` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT untuk tabel `overtime`
+--
+ALTER TABLE `overtime`
+  MODIFY `id_lembur` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `tanggal`
