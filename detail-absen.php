@@ -8,7 +8,7 @@ session_start();
 if (!isset($_SESSION["login"])) {
     echo "<script>
             alert('Anda perlu login untuk memasuki halaman');
-            document.location.href = 'login.php';
+            document.location.href = 'index.php';
           </script>";
     exit;
 }
@@ -50,7 +50,7 @@ $query_absen = select("
 
 // Check if there are any rows returned
 if (empty($query_absen)) {
-    echo "<p>Tidak ada data absensi yang ditemukan untuk akun ini.</p>";
+  
 } else {
     // Query basis data untuk mengambil nama akun
     $query_nama = select("SELECT nama FROM akun WHERE id_akun = $id_user ");
@@ -67,29 +67,29 @@ if (empty($query_absen)) {
         </div>
     </div>
     <!-- Content Header (Page header) -->
-  <section class="content">
-      <div class="container-fluid">
-        <div class="card">
-          <div class="card-header">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+    <div class="card-header">
         <h3 class="card-title" style="margin-top: 5px;">Detail Absensi - <?php echo $nama_akun; ?></h3>
-      <a href="exportxl.php?id_user=<?php echo $id_user; ?>" class="btn btn-success float-right">Export to Excel</a>
+        <a href="exportxl.php?id_user=<?php echo $id_user; ?>" class="btn btn-success float-right">Export to Excel</a>
     </div>
-      <div class="card-body">
-    <?php if (empty($query_absen)) : ?>
-    <p>Tidak ada data absensi yang ditemukan untuk akun ini.</p>
-    <?php else : ?>
-  <table class="table table-bordered table-hover mt-3">
-    <thead>
-    <tr>
-        <th>No</th>
-        <th>Tanggal</th>
-        <th>Jam Masuk</th>
-        <th>Jam Keluar</th>
-        <th>Durasi</th>
-        <th>Keterangan</th>
-    </tr>
-    </thead>
-    <tbody>
+    <div class="card-body">
+        <?php if (empty($query_absen)) : ?>
+            <p>Tidak ada data absensi yang ditemukan untuk akun ini.</p>
+        <?php else : ?>
+            <table class="table table-bordered table-hover mt-3">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Tanggal</th>
+                        <th>Jam Masuk</th>
+                        <th>Jam Keluar</th>
+                        <th>Durasi</th>
+                        <th>Keterangan</th>
+                  </tr>
+            </thead>
+        <tbody>
 <?php foreach ($query_absen as $key => $absen) : ?>
     <tr>
         <td><?php echo $key + 1; ?></td>
@@ -103,15 +103,14 @@ if (empty($query_absen)) {
             <?php
             $jam_masuk = DateTime::createFromFormat('H:i', $absen['jam_msk']);
             $jam_keluar = DateTime::createFromFormat('H:i', $absen['jam_klr']);
-
-            if ($jam_masuk && $jam_keluar) {
-                $selisih_waktu = $jam_masuk->diff($jam_keluar);
-                echo $selisih_waktu->format('%H jam %i menit');
-            } else {
-                echo "<strong>Format waktu tidak valid</strong>";
-            }
-            ?>
-        </td>
+        if ($jam_masuk && $jam_keluar) {
+            $selisih_waktu = $jam_masuk->diff($jam_keluar);
+            echo $selisih_waktu->format('%H jam %i menit');
+        } else {
+            echo "<strong>Format waktu tidak valid</strong>";
+}
+?>
+</td>
         <td><?php echo $absen['keterangan']; ?></td>
     </tr>
            <?php endforeach; ?>

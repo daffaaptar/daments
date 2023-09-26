@@ -5,7 +5,7 @@ session_start();
 if (!isset($_SESSION["login"])) { 
     echo "<script> 
             alert('Anda perlu login untuk memasuki halaman'); 
-            document.location.href = 'login.php'; 
+            document.location.href = 'index.php'; 
         </script>"; 
     exit; 
 } 
@@ -32,13 +32,15 @@ if (isset($_POST['submit'])) {
     $project_name = mysqli_real_escape_string($db, $_POST["projectName"]);
     $start_date = mysqli_real_escape_string($db, $_POST["startDate"]);
     $end_date = mysqli_real_escape_string($db, $_POST["endDate"]);
-    $durasi = mysqli_real_escape_string($db, $_POST["durasi"]);
     $status_activity = mysqli_real_escape_string($db, $_POST["status"]);
     $detail_activity = mysqli_real_escape_string($db, $_POST["detail"]);
     
     // Sesuaikan kolom yang akan diisi sesuai dengan struktur tabel "activity"
-    $sql =  "INSERT INTO activity (id_akun, tipe_activity, project_name, start_date, end_date, durasi, status_activity, detail_activity) 
-    VALUES ('$id_akun', '$tipe_activity', '$project_name', '$start_date', '$end_date', $durasi, '$status_activity', '$detail_activity')";
+
+
+    $sql =  "INSERT INTO activity (id_akun, tipe_activity, project_name, start_date, end_date,  status_activity, detail_activity) 
+    VALUES ('$id_akun', '$tipe_activity', '$project_name', '$start_date', '$end_date', '$status_activity', '$detail_activity')";
+
 
 
     if (mysqli_query($db, $sql)) {
@@ -73,7 +75,7 @@ if (isset($_POST['submit'])) {
   
     <form action="" method="post">
         <label for="tipe">Type Activity:</label>
-        <select name="tipe" id="tipe" class="form-control">
+        <select name="tipe" id="tipe" class="form-control" require>
             <option value="">-- Select an activity --</option>
             <option value="development">Development</option>
             <option value="discuss">Discuss</option>
@@ -84,19 +86,12 @@ if (isset($_POST['submit'])) {
         <label for="projectName">Project Name:</label>
         <input type="text" name="projectName" id="projectName" class="form-control" required>
         <br>
-        
         <label for="startDate">Start Date:</label>
-        <input type="date" name="startDate" id="startDate" class="form-control" required>
+        <input type="date" name="startDate" id="startDate" class="form-control" >
         <br>
-        
         <label for="endDate">End Date:</label>
-        <input type="date" name="endDate" id="endDate" class="form-control" required>
+        <input type="date" name="endDate" id="endDate" class="form-control" >
         <br>
-        
-        <label for="durasi">Duration (jam):</label>
-        <input type="number" name="durasi" id="durasi" class="form-control" required>
-        <br>
-
         <label for="status">Status Activity:</label>
         <select name="status" id="status" class="form-control">
             <option value="">-- Select an status --</option>

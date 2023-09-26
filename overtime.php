@@ -5,7 +5,7 @@ session_start();
 if (!isset($_SESSION["login"])) {
     echo "<script>
             alert('Anda perlu login untuk memasuki halaman');
-            document.location.href = 'login.php';
+            document.location.href = index.php';
           </script>";
     exit;
 }
@@ -13,6 +13,10 @@ if (!isset($_SESSION["login"])) {
 $title = 'Daftar Akun';
 
 include 'layout/header.php';
+//cek
+$data_akun = select("SELECT * FROM akun");
+
+//menambah
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve data from the form
     $tanggal = $_POST["tanggal"];
@@ -41,6 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
     $conn->close();
 }
+
 
 
 ?>
@@ -87,17 +92,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="date" id="tanggal" name="tanggal" class="form-control" required>
     </div>
     <div class="form-group">
+       
         <label for="datang">Datang Pukul:</label>
         <input type="time" id="datang" name="datang" class="form-control" required>
     </div>
     <div class="form-group">
         <label for="pulang">Pulang Pukul:</label>
-        <input type="time" id="pulang" name="pulang" class="form-control" required>
+        <input type="time" id="pulang" name="pulang" class="form-control" value="" required>
     </div>
-    <div class="form-group">
-        <label for="durasi">Durasi (jam):</label>
-        <input type="number" id="durasi" name="durasi" class="form-control" required>
-    </div>
+   
+ 
     <div class="form-group">
         <label for="jam-lembur">Jumlah Jam Lembur:</label>
         <input type="number" id="jam-lembur" name="jam-lembur" class="form-control" required>
@@ -120,6 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          </div>
         </section>
       </div>
+      
    </body>
 </html>
 <?php include 'layout/footer2.php'; ?>
