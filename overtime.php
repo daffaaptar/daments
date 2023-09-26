@@ -5,7 +5,7 @@ session_start();
 if (!isset($_SESSION["login"])) {
     echo "<script>
             alert('Anda perlu login untuk memasuki halaman');
-            document.location.href = 'login.php';
+            document.location.href = index.php';
           </script>";
     exit;
 }

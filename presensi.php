@@ -25,6 +25,7 @@ include 'layout/header.php';
 
 // tampil seluruh data
 $data_akun = select("SELECT * FROM akun");
+$data_absen = select("SELECT * FROM data_absen");
 
 // tampil data berdasarkan user login
 $id_akun = $_SESSION['id_akun'];
@@ -32,8 +33,9 @@ $id_akun = $_SESSION['id_akun'];
 $data_bylogin = select("SELECT * FROM akun WHERE id_akun = $id_akun");
 
 if (isset($_POST['ubah_keterangan'])) {
-    // Ambil id_user yang akan diubah keterangannya
+    // Ambil id_absen yang akan diubah keterangannya
     $id_absen = $_POST['id_absen'];
+    
 
     // Ambil keterangan yang baru dimasukkan oleh pengguna
     $new_keterangan = $_POST['keterangan'];
@@ -43,14 +45,14 @@ if (isset($_POST['ubah_keterangan'])) {
         // Perbarui keterangan dalam tabel data_absen
         $query_update_keterangan = "UPDATE data_absen SET keterangan = ? WHERE id_absen = ?";
         $stmt = $db->prepare($query_update_keterangan);
-        
+
         if ($stmt === false) {
             die('Prepare failed: ' . htmlspecialchars($db->error));
         }
-        
+
         // Bind parameters
         $stmt->bind_param('si', $new_keterangan, $id_absen);
-        
+
         // Eksekusi pernyataan
         if ($stmt->execute()) {
             echo "<script>
@@ -59,7 +61,7 @@ if (isset($_POST['ubah_keterangan'])) {
                   </script>";
         } else {
             echo "<script>
-                    alert('Keterangan Gagal Diubah');
+                    alert('Keterangan Gagal Diubah: " . htmlspecialchars($stmt->error) . "');
                     document.location.href = 'presensi.php';
                   </script>";
         }
@@ -73,6 +75,7 @@ if (isset($_POST['ubah_keterangan'])) {
               </script>";
     }
 }
+
 
 
 ?>
@@ -136,6 +139,7 @@ while ($get_month=$query_month->fetch_assoc()) {
             }
             echo "<tr>
                     <td>$no</td>
+                    <td>$get_absen[id]</td>
                     <td>$date</td>
                     <td>$time_in</td>
                     <td>$time_out</td>
@@ -190,6 +194,7 @@ if ($cek!==0) {
             $no = 0;
             while ($get_absen = $query_absen->fetch_assoc()) {
                     $no++;
+                    $absen = $get_absen['id_absen'];
                     $date = "{$get_absen['nama_hri']}, {$get_absen['nama_tgl']} {$get_absen['nama_bln']} " . date("Y");
                     $time_in = $get_absen['jam_msk'];
                     $time_out = $get_absen['jam_klr'];
@@ -214,25 +219,54 @@ $selisih_waktu = "<strong>Format waktu tidak valid</strong>";
 }
 }
 
-        echo "<tr>
+                echo "<tr>
                 <td>$no</td>
                 <td>$date</td>
                 <td>$time_in</td>
                 <td>$time_out</td>
                 <td>" . ($selisih_waktu instanceof DateInterval ? $selisih_waktu->format('%H jam %i menit') : $selisih_waktu) . "</td>
                 <td>$keterangan</td>
-                <td style='text-align:right;'> <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#keluar' style='font-size:18px; border-radius:5px;'>
+               
+
+                
+                <td style='text-align:right;'> <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#keluar'  style='font-size:18px; border-radius:5px;'>
                 <i class='nav-icon fas fa-pen'></i>
                 </button> </td>
             </tr>";
-}
-echo "</table>";
+                }
+echo "</table>
+<div class='modal fade' id='keluar' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
+<div class='modal-dialog'>
+  <div class='modal-content'>
+    <div class='modal-header'>
+      <h5 class='modal-title' id='staticBackdropLabel'><i class='fas fa-sign-out-alt'></i>Keterangan</h5>
+      <button type='button' class='close' data-bs-dismiss='modal' aria-label='Close'>
+          <span aria-hidden='true'>&times;</span>
+      </button>
+    </div>
+    <div class='modal-body'>
+    <form method='POST'>
+    
+      <input type='text' name='id_absen' id='id_absen' value='$absen'>
+
+  <div class='form-group'>
+      <label for='keterangan'>Keterangan:</label>
+      <input type='text' name='keterangan' id='keterangan' class='form-control' value='$keterangan' required>
+  </div>
+  <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Batal</button>
+  <button type='submit' name='ubah_keterangan' class='btn btn-primary'>Ubah Keterangan</button>
+</form>
+    
+  </div>
+</div>
+</div>";
                             }
                 }
                 $db->close();
             } else {
                 echo "<div class='alert alert-warning'><strong>Tidak ada Absensi untuk ditampilkan.</strong></div>";
             }
+            
     }
 ?>
 
@@ -242,7 +276,7 @@ echo "</table>";
             </div>
         </section>
 </div>
-
+<?php foreach ($data_absen as $absen) : ?>
 <div class='modal fade' id='keluar' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
   <div class='modal-dialog'>
     <div class='modal-content'>
@@ -254,7 +288,9 @@ echo "</table>";
       </div>
       <div class='modal-body'>
       <form method="POST">
-    <input type="hidden" name="id_absen" value="<?php echo $id_absen; ?>">
+      
+        <input type="text" name="id_absen" id="id_absen" value="<?php echo $absen['id_absen']; ?>">
+
     <div class="form-group">
         <label for="keterangan">Keterangan:</label>
         <input type="text" name="keterangan" id="keterangan" class="form-control" value="<?php echo $keterangan; ?>" required>
@@ -266,5 +302,7 @@ echo "</table>";
     </div>
   </div>
 </div>
+<?php endforeach ?>
+
 
 <?php include 'layout/footer.php'; ?>

@@ -5,7 +5,7 @@ session_start();
 if (!isset($_SESSION["login"])) { 
     echo "<script> 
             alert('Anda perlu login untuk memasuki halaman'); 
-            document.location.href = 'login.php'; 
+            document.location.href = 'index.php'; 
         </script>"; 
     exit; 
 } 
@@ -25,7 +25,7 @@ if ($_SESSION["level"] != "karyawan") {
 include 'layout/header.php';
 
 $id_akun = $_SESSION['id_akun'];
-$data_bylogin = select("SELECT * FROM akun WHERE id_akun = $id_akun");
+
 
 if (isset($_POST['submit'])) {
     $tipe_activity = mysqli_real_escape_string($db, $_POST["tipe"]);
@@ -36,8 +36,12 @@ if (isset($_POST['submit'])) {
     $detail_activity = mysqli_real_escape_string($db, $_POST["detail"]);
     
     // Sesuaikan kolom yang akan diisi sesuai dengan struktur tabel "activity"
-    $sql = "INSERT INTO activity (tipe_activity, project_name, start_date, end_date,  status_activity, detail_activity) 
-            VALUES ('$tipe_activity', '$project_name', '$start_date', '$end_date', '$status_activity', '$detail_activity')";
+
+
+    $sql =  "INSERT INTO activity (id_akun, tipe_activity, project_name, start_date, end_date,  status_activity, detail_activity) 
+    VALUES ('$id_akun', '$tipe_activity', '$project_name', '$start_date', '$end_date', '$status_activity', '$detail_activity')";
+
+
 
     if (mysqli_query($db, $sql)) {
         echo "<script>window.alert('Success');
