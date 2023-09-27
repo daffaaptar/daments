@@ -62,14 +62,16 @@ if (isset($_GET['id_user'])) {
     <section class="content"> 
         <div class="container-fluid"> 
             <div class="card"> 
+                <div class="card-header">
+                    <h3 class="card-title" style="margin-top: 5px;">Detail Absensi - <?php echo $nama_akun; ?></h3>
+                    <a href="exportxl.php?id_user=<?php echo $id_user; ?>" class="btn btn-danger float-right">Export to Excel</a>
+                </div>
                 <div class="card-body"> 
                 <?php if (mysqli_num_rows($result) > 0) : ?>
                     <?php
                     $bulan_sebelumnya = ''; // Inisialisasi variabel untuk menyimpan bulan sebelumnya
                     $no = 1; // Inisialisasi nomor urut
                     ?>
-                    <h3>Aktivitas - <?php echo $nama_akun; ?></h3>
-                    <a href="exportxl.php?id_user=<?php echo $id_user; ?>" class="btn btn-danger float-right">Export to Excel</a>
                     <?php
                     while ($data = mysqli_fetch_assoc($result)) :
                         $tanggal = $data['tanggal'];
