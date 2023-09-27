@@ -1,9 +1,6 @@
 <?php
 session_start();
 
-// require_once 'path_to_phpexcel/PHPExcel.php';
-// require_once 'path_to_phpexcel/PHPExcel/IOFactory.php';
-
 // membatasi halaman sebelum login
 if (!isset($_SESSION["login"])) {
     echo "<script>
@@ -45,7 +42,7 @@ $query_absen = select("
     JOIN bulan ON data_absen.id_bln = bulan.id_bln
     JOIN hari ON data_absen.id_hri = hari.id_hri
     WHERE
-        data_absen.id_user = $id_user;
+        data_absen.id_user = $id_user
 ");
 
 // Check if there are any rows returned
@@ -57,6 +54,11 @@ if (empty($query_absen)) {
     $nama_akun = $query_nama[0]['nama'];
 }
 ?>
+<style>
+    h2 {
+    margin-top: 20px; /* Sesuaikan dengan ukuran yang Anda inginkan */
+}
+</style>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -78,45 +80,68 @@ if (empty($query_absen)) {
                     <?php if (empty($query_absen)) : ?>
                         <p>Tidak ada data absensi yang ditemukan untuk akun ini.</p>
                     <?php else : ?>
-                        <table class="table table-bordered table-hover mt-3">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Tanggal</th>
-                                    <th>Jam Masuk</th>
-                                    <th>Jam Keluar</th>
-                                    <th>Durasi</th>
-                                    <th>Keterangan</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($query_absen as $key => $absen) : ?>
-                                    <tr>
-                                        <td><?php echo $key + 1; ?></td>
-                                        <td><?php 
-                                       $date = "$absen[hari], $absen[tanggal] $absen[bulan] ".date("Y");
-                                        echo $date; ?></td>
-                                        
-                                        <td><?php echo $absen['jam_msk']; ?></td>
-                                        <td><?php echo $absen['jam_klr']; ?></td>
-                                        <td>
-                                            <?php
-                                            $jam_masuk = DateTime::createFromFormat('H:i', $absen['jam_msk']);
-                                            $jam_keluar = DateTime::createFromFormat('H:i', $absen['jam_klr']);
+                        <?php
+                        $bulan_sebelumnya = ''; // Inisialisasi variabel untuk menyimpan bulan sebelumnya
+                        $nomor_urut = 1; // Inisialisasi nomor urut
 
-                                            if ($jam_masuk && $jam_keluar) {
-                                                $selisih_waktu = $jam_masuk->diff($jam_keluar);
-                                                echo $selisih_waktu->format('%H jam %i menit');
-                                            } else {
-                                                echo "<strong>Format waktu tidak valid</strong>";
-                                            }
-                                            ?>
-                                        </td>
-                                        <td><?php echo $absen['keterangan']; ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                        foreach ($query_absen as $key => $absen) :
+                            // Mengambil bulan dari tanggal
+                            $bulan_saat_ini = $absen['bulan'];
+
+                            // Memeriksa apakah bulan berbeda dari bulan sebelumnya
+                            if ($bulan_saat_ini != $bulan_sebelumnya) :
+                                // Jika bulan berbeda, buat tabel baru dan tampilkan judul bulan
+                                if ($key > 0) {
+                                    echo '</tbody></table>'; // Menutup tabel sebelumnya
+                                }
+                                echo "<h2>$bulan_saat_ini</h2>";
+                                $nomor_urut = 1; // Mengatur ulang nomor urut ketika bulan berubah
+                        ?>
+                                <table class="table table-bordered table-hover mt-3">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tanggal</th>
+                                            <th>Jam Masuk</th>
+                                            <th>Jam Keluar</th>
+                                            <th>Durasi</th>
+                                            <th>Keterangan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                            <?php endif; ?>
+                            <tr>
+                                <td><?php echo $nomor_urut; ?></td>
+                                <td><?php
+                                    $date = "$absen[hari], $absen[tanggal] $absen[bulan] " . date("Y");
+                                    echo $date; ?></td>
+
+                                <td><?php echo $absen['jam_msk']; ?></td>
+                                <td><?php echo $absen['jam_klr']; ?></td>
+                                <td>
+                                    <?php
+                                    $jam_masuk = DateTime::createFromFormat('H:i', $absen['jam_msk']);
+                                    $jam_keluar = DateTime::createFromFormat('H:i', $absen['jam_klr']);
+
+                                    if ($jam_masuk && $jam_keluar) {
+                                        $selisih_waktu = $jam_masuk->diff($jam_keluar);
+                                        echo $selisih_waktu->format('%H jam %i menit');
+                                    } else {
+                                        echo "<strong>Format waktu tidak valid</strong>";
+                                    }
+                                    ?>
+                                </td>
+                                <td><?php echo $absen['keterangan']; ?></td>
+                            </tr>
+                            <?php
+                            // Menyimpan bulan saat ini ke bulan sebelumnya untuk perbandingan berikutnya
+                            $bulan_sebelumnya = $bulan_saat_ini;
+                            $nomor_urut++; // Tingkatkan nomor urut
+                        endforeach;
+
+                        // Tutup tabel terakhir
+                        echo '</tbody></table><br>';
+                        ?>
                     <?php endif; ?>
                 </div>
             </div>

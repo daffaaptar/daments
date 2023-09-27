@@ -235,31 +235,7 @@ $selisih_waktu = "<strong>Format waktu tidak valid</strong>";
             </tr>";
                 }
 echo "</table>
-<div class='modal fade' id='keluar' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
-<div class='modal-dialog'>
-  <div class='modal-content'>
-    <div class='modal-header'>
-      <h5 class='modal-title' id='staticBackdropLabel'><i class='fas fa-sign-out-alt'></i>Keterangan</h5>
-      <button type='button' class='close' data-bs-dismiss='modal' aria-label='Close'>
-          <span aria-hidden='true'>&times;</span>
-      </button>
-    </div>
-    <div class='modal-body'>
-    <form method='POST'>
-    
-      <input type='text' name='id_absen' id='id_absen' value='$absen'>
-
-  <div class='form-group'>
-      <label for='keterangan'>Keterangan:</label>
-      <input type='text' name='keterangan' id='keterangan' class='form-control' value='$keterangan' required>
-  </div>
-  <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Batal</button>
-  <button type='submit' name='ubah_keterangan' class='btn btn-primary'>Ubah Keterangan</button>
-</form>
-    
-  </div>
-</div>
-</div>";
+";
                             }
                 }
                 $db->close();

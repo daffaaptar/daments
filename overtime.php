@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="card-body">
                     <form action="" method="post">
                         <div class="form-group">
-                            <input type="hidden" id="id_lembur" name="id_lembur" class="form-control" value="<?php echo $id_akun; ?>" readonly>
+                            <input type="text" id="id_lembur" name="id_lembur" class="form-control" value="<?php echo $id_akun; ?>" readonly>
                         </div>
                         <div class="form-group">
                             <label for="tanggal">Tanggal:</label>

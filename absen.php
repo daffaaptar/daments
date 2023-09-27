@@ -70,6 +70,12 @@ if ($_SESSION["level"] != "karyawan") {
     exit;
 }
 ?>
+<style>
+    btn btn-success {
+    background:#ff96ad;
+    box-shadow:0 0 5px #ff96ad, 0 0 25px #ff96ad, 0 0 200px #ff96ad;
+    }
+</style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
