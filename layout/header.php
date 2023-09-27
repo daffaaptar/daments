@@ -82,38 +82,6 @@ include 'config/app.php';
             </li>
             <?php endif; ?>
 
-        <?php if ($_SESSION['level'] == "karyawan") : ?>
-            <li class="nav-item">
-                <a href="presensi.php" class="nav-link">
-                    <i class="nav-icon fas fa-book"></i>
-                    <p>
-                        Rekap Absen
-                    </p>
-                </a>
-            </li>
-            <?php endif; ?>
-
-        <?php if ($_SESSION['level'] == "karyawan") : ?>
-            <li class="nav-item">
-                <a href="rekaplembur.php" class="nav-link">
-                    <i class="nav-icon fas  fa-clock"></i>
-                    <p>
-                        Rekap Lembur
-                    </p>
-                </a>
-            </li>
-            <?php endif; ?>
-        <?php if ($_SESSION['level'] == "karyawan") : ?>
-            <li class="nav-item">
-                <a href="rekapaktivitas.php" class="nav-link">
-                    <i class="nav-icon fas  fa-user"></i>
-                    <p>
-                        Rekap Aktifitas
-                    </p>
-                </a>
-            </li>
-            <?php endif; ?>
-
             <?php if ($_SESSION['level'] == "karyawan" ) : ?>
         <li class="nav-item">
             <a href="absen.php" class="nav-link">
@@ -146,6 +114,38 @@ include 'config/app.php';
                 </a>
             </li>
             <?php endif; ?>
+        <?php if ($_SESSION['level'] == "karyawan") : ?>
+            <li class="nav-item">
+                <a href="presensi.php" class="nav-link">
+                    <i class="nav-icon fas fa-book"></i>
+                    <p>
+                        Rekap Absen
+                    </p>
+                </a>
+            </li>
+            <?php endif; ?>
+
+        <?php if ($_SESSION['level'] == "karyawan") : ?>
+            <li class="nav-item">
+                <a href="rekaplembur.php" class="nav-link">
+                    <i class="nav-icon fas  fa-clock"></i>
+                    <p>
+                        Rekap Lembur
+                    </p>
+                </a>
+            </li>
+            <?php endif; ?>
+        <?php if ($_SESSION['level'] == "karyawan") : ?>
+            <li class="nav-item">
+                <a href="rekapaktivitas.php" class="nav-link">
+                    <i class="nav-icon fas  fa-user"></i>
+                    <p>
+                        Rekap Aktifitas
+                    </p>
+                </a>
+            </li>
+            <?php endif; ?>
+
 
             <?php if ($_SESSION['level'] == "super-admin" || $_SESSION['level'] == "admin") : ?>
             <li class="nav-item">

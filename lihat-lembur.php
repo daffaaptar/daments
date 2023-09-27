@@ -10,7 +10,7 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 
-$title = 'Detail Aktivitas';
+$title = 'Detail Lembur';
 
 // Memeriksa level pengguna
 if ($_SESSION["level"] != "super-admin") {
@@ -48,7 +48,7 @@ if (isset($_GET['id_user'])) {
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0"><i class="nav-icon fas fa-user"></i> Detail Aktivitas</h1>
+                    <h1 class="m-0"><i class="nav-icon fas fa-user"></i> Detail Lembur</h1>
                 </div>
             </div>
         </div>
@@ -59,8 +59,8 @@ if (isset($_GET['id_user'])) {
         <div class="container-fluid"> 
             <div class="card"> 
             <div class="card-header">
-                    <h3 class="card-title" style="margin-top: 5px;">Detail Absensi - <?php echo $nama_akun; ?></h3>
-                    <a href="exportxl.php?id_user=<?php echo $id_user; ?>" class="btn btn-danger float-right">Export to Excel</a>
+                    <h3 class="card-title" style="margin-top: 5px;">Detail Lembur - <?php echo $nama_akun; ?></h3>
+                    <a href="exportxllebur.php?id_user=<?php echo $id_user; ?>" class="btn btn-danger float-right">Export to Excel</a>
                 </div>
                 <div class="card-body"> 
                 <?php if (mysqli_num_rows($result) > 0) : ?>
