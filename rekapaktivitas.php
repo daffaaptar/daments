@@ -42,6 +42,10 @@ $data_activity = select("SELECT * FROM activity WHERE id_akun = $id_akun"); // S
     <section class="content">
         <div class="container-fluid">
             <div class="card">
+            <div class="card-header">
+                    <h3 class="card-title" style="margin-top: 5px;">Detail Aktivitas</h3>
+                    <a href="exportaktivitas.php?id_user=<?php echo $id_user; ?>" class="btn btn-danger float-right">Export to Excel</a>
+                </div>
                 <div class='card-body'>
                     <h3 class='sub-header'>Rekap Aktivitas</h3>
                     <table class='table table-bordered table-hover mt-3'>

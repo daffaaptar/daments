@@ -64,7 +64,7 @@ if (isset($_GET['id_user'])) {
             <div class="card"> 
                 <div class="card-header">
                     <h3 class="card-title" style="margin-top: 5px;">Detail Absensi - <?php echo $nama_akun; ?></h3>
-                    <a href="exportxl.php?id_user=<?php echo $id_user; ?>" class="btn btn-danger float-right">Export to Excel</a>
+                    <a href="exportaktivitas.php?id_user=<?php echo $id_user; ?>" class="btn btn-danger float-right">Export to Excel</a>
                 </div>
                 <div class="card-body"> 
                 <?php if (mysqli_num_rows($result) > 0) : ?>

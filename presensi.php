@@ -24,7 +24,7 @@ $title = 'Daftar Akun';
 include 'layout/header.php';
 
 // tampil seluruh data
-$data_akun = select("SELECT * FROM akun");
+$data_akun = select("SELECT * FROM akun ");
 $data_absen = select("SELECT * FROM data_absen");
 
 // tampil data berdasarkan user login
@@ -96,6 +96,10 @@ if (isset($_POST['ubah_keterangan'])) {
     <section class="content">
 			<div class="container-fluid">
 				<div class="card">
+                <div class="card-header">
+                    <h3 class="card-title" style="margin-top: 5px;">Detail Absensi</h3>
+                    <a href="exportxl.php?id_user=<?php echo $id_akun; ?>" class="btn btn-danger float-right">Export to Excel</a>
+                </div>
 				<div class='card-body'>
 
 <?php
