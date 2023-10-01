@@ -49,7 +49,7 @@ $data_lembur = select("SELECT * FROM overtime WHERE id_lembur = $id_user");
             <div class="card">
             <div class="card-header">
                     <h3 class="card-title" style="margin-top: 5px;">Detail Lembur </h3>
-                    <a href="exportxllebur.php?id_user=<?php echo $id_user; ?>" class="btn btn-danger float-right">Export to Excel</a>
+                    <a href="exportxllebur.php?id_user=<?php echo $id_user; ?>" class="btn btn-success float-right"><i class="nav-icon fas fa-print"></i></a>
                 </div>
                 <div class='card-body'>
                     <?php

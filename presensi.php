@@ -98,7 +98,7 @@ if (isset($_POST['ubah_keterangan'])) {
 				<div class="card">
                 <div class="card-header">
                     <h3 class="card-title" style="margin-top: 5px;">Detail Absensi</h3>
-                    <a href="exportxl.php?id_user=<?php echo $id_akun; ?>" class="btn btn-danger float-right">Export to Excel</a>
+                    <a href="exportxl.php?id_user=<?php echo $id_akun; ?>" class="btn btn-success float-right"><i class="nav-icon fas fa-print"></i></a>
                 </div>
 				<div class='card-body'>
 
@@ -231,15 +231,14 @@ $selisih_waktu = "<strong>Format waktu tidak valid</strong>";
                 <td>" . ($selisih_waktu instanceof DateInterval ? $selisih_waktu->format('%H jam %i menit') : $selisih_waktu) . "</td>
                 <td>$keterangan</td>
                
-
-                
                 <td style='text-align:right;'> <button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#keluar'  style='font-size:18px; border-radius:5px;'>
                 <i class='nav-icon fas fa-pen'></i>
+                
                 </button> </td>
-            </tr>";
+                </tr>";
                 }
-echo "</table>
-";
+                echo "</table>
+                ";
                             }
                 }
                 $db->close();
